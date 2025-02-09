@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Backend</title>
+</head>
+<body>
+    <h1>Upload Dataset</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv,.xlsx">
+        <input type="text" name="target_columns" placeholder="Target columns (comma-separated)">
+        <input type="number" name="k_features" placeholder="Number of features to select">
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
