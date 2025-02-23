@@ -1,0 +1,16 @@
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+
+{
+  "bodyFrame_Breadth": "Thin/Narrow",
+  "bodyBuild_Size": "Weaklydeveloped",
+  "shoulder_Breadth": "Thin/Narrow",
+  "chest_Breadth": "Thin/Narrow",
+  "walking_style": "Unsteady",
+  "skin_Type": "Thin",
+  "sleep_Quality": "Shallow",
+  "working_Quality": "Wavering/Easilydeviated",
+  "appetite_Frequency": "Regular",
+  "working_style": "Unsteady"
+}
+
