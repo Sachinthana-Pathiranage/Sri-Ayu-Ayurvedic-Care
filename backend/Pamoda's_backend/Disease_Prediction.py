@@ -7,16 +7,16 @@ import pandas as pd
 app = Flask(__name__)
 
 # Load the model, scaler, label encoder, and PCA
-model_path = r'C:\Users\prabh\Desktop\pythonProject1\venv\Models\tuned_random_forest_model (1).pkl'
+model_path = r'C:\Users\prabh\Desktop\Sri-Ayu-Ayurvedic-Care\venv\Models\tuned_random_forest_model (1).pkl'
 model = joblib.load(model_path)
 
-scaler_path = r'C:\Users\prabh\Desktop\pythonProject1\venv\Models\scaler (1).pkl'
+scaler_path = r'C:\Users\prabh\Desktop\Sri-Ayu-Ayurvedic-Care\venv\Models\scaler (1).pkl'
 scaler = joblib.load(scaler_path)
 
-label_encoder_path = r'C:\Users\prabh\Desktop\pythonProject1\venv\Models\label_encoder (1).pkl'
+label_encoder_path = r'C:\Users\prabh\Desktop\Sri-Ayu-Ayurvedic-Care\venv\Models\label_encoder (1).pkl'
 label_encoder = joblib.load(label_encoder_path)
 
-pca_optimal_path = r'C:\Users\prabh\Desktop\pythonProject1\venv\Models\pca_model (1).pkl'
+pca_optimal_path = r'C:\Users\prabh\Desktop\Sri-Ayu-Ayurvedic-Care\venv\Models\pca_model (1).pkl'
 pca_optimal = joblib.load(pca_optimal_path)
 
 # Define feature names (ensure they match the dataset columns)
