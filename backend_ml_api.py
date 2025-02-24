@@ -39,7 +39,7 @@ def predict_treatment(input_data: UserInput, db=Depends(get_db_connection)):
         processed_data = preprocess_input(input_data)
         prediction_prob = ml_model.predict_proba(processed_data)[0]
         success_rate = prediction_prob[1]
-        response = {"success_rate": round(success_rate * 100, 2)}
+       
         
         if success_rate > 0.7:
             response["status"] = "High Success Rate"
