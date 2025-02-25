@@ -3,7 +3,9 @@ import joblib
 import pandas as pd
 
 # Initialize Flask app
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 # Load the model, scaler, label encoder, and PCA
 model_path = r'C:\Users\prabh\Desktop\Sri-Ayu-Ayurvedic-Care\venv\Models\tuned_random_forest_model (1).pkl'
@@ -33,6 +35,7 @@ def predict():
     try:
         # Get JSON data from the request
         input_data = request.json
+        print("Received input:", input_data)  # Debugging line
 
         # Validate input data
         if not all(feature in input_data for feature in feature_names):
