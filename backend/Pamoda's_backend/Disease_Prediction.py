@@ -35,7 +35,7 @@ def predict():
     try:
         # Get JSON data from the request
         input_data = request.json
-        print("Received input:", input_data)  # Debugging line
+        print("Received user input:", input_data)  # Debugging line
 
         # Validate input data
         if not all(feature in input_data for feature in feature_names):
