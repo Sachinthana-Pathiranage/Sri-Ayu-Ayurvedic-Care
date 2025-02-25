@@ -41,7 +41,7 @@ def predict():
         # Convert input data into a DataFrame
         input_df = pd.DataFrame([input_data], columns=feature_names)
 
-        # Check if all symptoms are zero
+        # When all symptoms are zero
         if all(value == 0 for value in input_data.values()):
             return jsonify({
                 "prediction": "No Disease",
