@@ -6,11 +6,11 @@ Content-Type: application/json
   "bodyBuild_Size": "Weaklydeveloped",
   "shoulder_Breadth": "Thin/Narrow",
   "chest_Breadth": "Thin/Narrow",
-  "walking_style": "Unsteady",
+  "walking_style": "Firm/Steady",
   "skin_Type": "Thin",
   "sleep_Quality": "Shallow",
   "working_Quality": "Wavering/Easilydeviated",
-  "appetite_Frequency": "Regular",
+  "appetite_Frequency": "Irregular",
   "working_style": "Unsteady"
 }
 
