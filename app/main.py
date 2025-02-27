@@ -4,12 +4,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import io
 import os
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 # Load the trained XGBoost model
 xgb_model = joblib.load(r'C:\Users\nabee\PycharmProjects\backend-sri-ayu\model\final_xgboost_model.pkl')
 
 # Initialize Flask app
 app = Flask(__name__)
+CORS(app)
 
 # Create static directory if it doesn't exist
 if not os.path.exists("static"):
