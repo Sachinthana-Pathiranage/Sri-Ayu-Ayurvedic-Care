@@ -8,7 +8,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 # Load the trained XGBoost model
-xgb_model = joblib.load(r'C:\Users\nabee\PycharmProjects\backend-sri-ayu\model\final_xgboost_model.pkl')
+xgb_model = joblib.load(r'/model/final_xgboost_model.pkl')
 
 # Initialize Flask app
 app = Flask(__name__)
