@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import joblib
 import pandas as pd
 import numpy as np
@@ -30,6 +31,15 @@ feature_mappings = {
 
 # Initialize FastAPI app
 app = FastAPI()
+
+# Allow all origins, methods, and headers for development:
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],       # or specify ["http://localhost:3000"] for your React dev server
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/predict")
 async def predict_dosha(features: dict):
