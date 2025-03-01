@@ -30,3 +30,28 @@ def get_db_connection():
         print(f"Error connecting to MySQL: {e}")
         return None
 
+def get_treatments(predicted_disease, age_group, dosha_type):
+    connection = get_db_connection()
+    treatments = []
+    if connection:
+        try:
+            cursor = connection.cursor(dictionary=True)
+            query = """
+            SELECT t.treatment
+            FROM treatments t
+            JOIN diseases d ON t.Disease_id = d.Disease_id
+            JOIN age_groups ag ON t.age_group_id = ag.age_group_id
+            JOIN doshas dh ON t.dosha_id = dh.dosha_id
+            WHERE d.Disease_name = %s AND ag.age_range = %s AND dh.dosha_type = %s
+            """
+
+            cursor.execute(query, (predicted_disease, age_group, dosha_type))
+            results = cursor.fetchall()
+            treatments = [result['treatment'] for result in results]
+
+        except Error as e:
+            print(f"Error fetching treatments: {e}")
+        finally:
+            cursor.close()
+            connection.close()
+    return treatments

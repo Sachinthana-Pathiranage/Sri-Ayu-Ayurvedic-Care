@@ -4,6 +4,7 @@ import pandas as pd
 
 # Initialize Flask app
 from flask_cors import CORS
+from db_utils import get_treatments
 app = Flask(__name__)
 CORS(app)
 
@@ -41,6 +42,17 @@ def predict():
         if not all(feature in input_data for feature in feature_names):
             return jsonify({"error": "Input data is missing one or more required features."}), 400
 
+        # Extract age_group and dosha_type
+        age_range = input_data.get('age_group')
+        dosha_type = input_data.get('dosha_type')
+
+        # Debugging: Print the extracted values
+        print(f"Received age_group: {age_range}")
+        print(f"Received dosha_type: {dosha_type}")
+
+        if not age_range or not dosha_type:
+            return jsonify({"error": "age_group and dosha_type are required fields."}), 400
+
         # Convert input data into a DataFrame
         input_df = pd.DataFrame([input_data], columns=feature_names)
 
@@ -62,12 +74,16 @@ def predict():
         probability = model.predict_proba(input_pca).max()
 
         # Decode the prediction
-        predicted_class = label_encoder.inverse_transform(prediction)[0]
+        predicted_disease = label_encoder.inverse_transform(prediction)[0]
+
+        # Fetch treatments from the database
+        treatments = get_treatments(predicted_disease, age_range, dosha_type)
 
         # Prepare the response
         response = {
-            "prediction": predicted_class,
-            "probability": float(probability)
+            "prediction": predicted_disease,
+            "probability": float(probability),
+            "treatments": treatments
         }
         return jsonify(response), 200
 
