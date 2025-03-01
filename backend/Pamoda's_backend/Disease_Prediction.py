@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
 
-# Initialize Flask app
+# Initialize Flask
 from flask_cors import CORS
 from db_utils import get_treatments
 app = Flask(__name__)
