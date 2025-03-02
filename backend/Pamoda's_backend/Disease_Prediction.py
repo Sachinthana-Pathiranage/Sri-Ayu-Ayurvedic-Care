@@ -51,7 +51,11 @@ def predict():
         print(f"Received dosha_type: {dosha_type}")
 
         if not age_range or not dosha_type:
-            return jsonify({"error": "age_group and dosha_type are required fields."}), 400
+            return jsonify({"error": "age_group is a required fields."}), 400
+
+            # Default to "Generic" if dosha_type is not provided
+        if not dosha_type:
+            dosha_type = "Generic"
 
         # Convert input data into a DataFrame
         input_df = pd.DataFrame([input_data], columns=feature_names)
