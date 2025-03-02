@@ -36,19 +36,37 @@ def get_treatments(predicted_disease, age_group, dosha_type):
     if connection:
         try:
             cursor = connection.cursor(dictionary=True)
-            query = """
-            SELECT t.treatment
-            FROM treatments t
-            JOIN diseases d ON t.Disease_id = d.Disease_id
-            JOIN age_groups ag ON t.age_group_id = ag.age_group_id
-            JOIN doshas dh ON t.dosha_id = dh.dosha_id
-            WHERE d.Disease_name = %s AND ag.age_range = %s AND dh.dosha_type = %s
-            """
+            # Modify the query to handle "Generic" dosha_type
+            if dosha_type == "Generic":
+                query = """
+                            SELECT t.treatment
+                            FROM treatments t
+                            JOIN diseases d ON t.Disease_id = d.Disease_id
+                            JOIN age_groups ag ON t.age_group_id = ag.age_group_id
+                            JOIN doshas dh ON t.dosha_id = dh.dosha_id
+                            WHERE d.Disease_name = %s AND ag.age_range = %s AND dh.dosha_type = 'Generic'
+                            """
+            else:
+                query = """
+                            SELECT t.treatment
+                            FROM treatments t
+                            JOIN diseases d ON t.Disease_id = d.Disease_id
+                            JOIN age_groups ag ON t.age_group_id = ag.age_group_id
+                            JOIN doshas dh ON t.dosha_id = dh.dosha_id
+                            WHERE d.Disease_name = %s AND ag.age_range = %s AND dh.dosha_type = %s
+                            """
 
-            cursor.execute(query, (predicted_disease, age_group, dosha_type))
+            # Execute the query with appropriate parameters
+            if dosha_type == "Generic":
+                cursor.execute(query, (predicted_disease, age_group))
+            else:
+                cursor.execute(query, (predicted_disease, age_group, dosha_type))
+
             results = cursor.fetchall()
             treatments = [result['treatment'] for result in results]
 
+            if not treatments:
+                print("No treatments found for the given parameters")
         except Error as e:
             print(f"Error fetching treatments: {e}")
         finally:
