@@ -85,6 +85,7 @@ def predict():
             "probability": float(probability),
             "treatments": treatments
         }
+        print(f"Backend Response: {response}")
         return jsonify(response), 200
 
     except Exception as e:
