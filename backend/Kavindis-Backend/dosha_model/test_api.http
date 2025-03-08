@@ -2,13 +2,13 @@ POST http://127.0.0.1:8000/predict
 Content-Type: application/json
 
 {
-  "bodyFrame_Breadth": "Medium",
+  "bodyFrame_Breadth": "Thin/Narrow",
   "bodyBuild_Size": "Moderatelydeveloped",
-  "shoulder_Breadth": "Medium",
-  "chest_Breadth": "Medium",
+  "shoulder_Breadth": "Thin/Narrow",
+  "chest_Breadth": "Thin/Narrow",
   "walking_style": "Sharp/Accurate",
-  "skin_Type": "Thick",
-  "sleep_Quality": "Shallow",
+  "skin_Type": "Thin",
+  "sleep_Quality": "Deep",
   "working_Quality": "Sharp/Accurate/Spontaneous",
   "appetite_Frequency": "Regular",
   "working_style": "Sharp/Accurate"

@@ -17,17 +17,57 @@ expected_features = [
 
 # Feature-specific categorical mappings
 feature_mappings = {
-    "bodyFrame_Breadth": {"Thin/Narrow": 0, "Medium": 1, "Broad": 2},
-    "bodyBuild_Size": {"Weaklydeveloped": 0, "Moderatelydeveloped": 1, "Welldeveloped": 2},
-    "shoulder_Breadth": {"Thin/Narrow": 0, "Medium": 1, "Broad": 2},
-    "chest_Breadth": {"Thin/Narrow": 0, "Medium": 1, "Broad": 2},
-    "walking_style": {"Unsteady": 0, "Firm/Steady": 1, "Sharp/Accurate": 2},
-    "skin_Type": {"Thin": 0, "Thick": 1},
-    "sleep_Quality": {"Shallow": 0, "Sound": 1, "Deep": 2},
-    "working_Quality": {"Wavering/Easilydeviated": 0, "Wellthoughtof": 1, "Sharp/Accurate/Spontaneous": 2},
-    "appetite_Frequency": {"Regular": 0, "Irregular": 1},
-    "working_style": {"Unsteady": 0, "Firm/Steady": 1, "Sharp/Accurate": 2}
-}
+
+        "bodyFrame_Breadth": {
+            "Broad": 0,
+            "Medium": 1,
+            "Thin/Narrow": 2
+        },
+        "bodyBuild_Size": {
+            "Moderatelydeveloped": 0,
+            "Weaklydeveloped": 1,
+            "Welldeveloped": 2
+        },
+        "shoulder_Breadth": {
+            "Broad": 0,
+            "Medium": 1,
+            "Thin/Narrow": 2
+        },
+        "chest_Breadth": {
+            "Broad": 0,
+            "Medium": 1,
+            "Thin/Narrow": 2
+        },
+        "walking_style": {
+            "Firm/Steady": 0,
+            "Sharp/Accurate": 1,
+            "Unsteady": 2
+        },
+        "skin_Type": {
+            "Thick": 0,
+            "Thin": 1
+        },
+        "sleep_Quality": {
+            "Deep": 0,
+            "Shallow": 1,
+            "Sound": 2
+        },
+        "working_Quality": {
+            "Sharp/Accurate/Spontaneous": 0,
+            "Wavering/Easilydeviated": 1,
+            "Wellthoughtof": 2
+        },
+        "appetite_Frequency": {
+            "Irregular": 0,
+            "Regular": 1
+        },
+        "working_style": {
+            "Firm/Steady": 0,
+            "Sharp/Accurate": 1,
+            "Unsteady": 2
+        }
+    }
+
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -35,7 +75,7 @@ app = FastAPI()
 # Allow all origins, methods, and headers for development:
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],       # or specify ["http://localhost:3000"] for your React dev server
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -61,7 +101,7 @@ async def predict_dosha(features: dict):
             "error": "Some input values could not be mapped. Check your input values.",
             "missing_values": missing_values
         }
-
+    input_data = input_data[expected_features]
     print("\n Processed Data Before Prediction:\n", input_data)  # Debugging log
 
     # Convert DataFrame to NumPy array
@@ -72,13 +112,8 @@ async def predict_dosha(features: dict):
         prediction = model.predict(input_array)[0]
         print("\n Model Raw Prediction Output:", prediction)  # Debugging log
 
-        #  **Fix: Convert Boolean Predictions to Class Labels**
-        if isinstance(prediction, bool):
-            dosha_labels = {True: "Pitta", False: "Vata"}  # Adjust based on training labels
-            prediction = dosha_labels.get(prediction, "Unknown")
-
-        #  **Fix: If prediction is a number (0,1,2), map to correct Dosha**
-        dosha_labels = {0: "Pitta", 1: "Vata", 2: "Kapha"}
+        # Convert prediction to the correct Dosha label
+        dosha_labels = {0: "Kapha", 1: "Pitta", 2: "Vata"}
         prediction = dosha_labels.get(prediction, "Unknown")
 
         return {"dosha_prediction": str(prediction)}
