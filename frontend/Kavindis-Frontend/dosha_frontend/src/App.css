@@ -6,7 +6,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #B8E0DA;
     /*overscroll-behavior: none;*/
-    flex-wrap: wrap;     /* Allows wrapping on smaller screens */
+    flex-wrap: wrap;     /* on smaller screens */
 
 }
 
@@ -87,6 +87,9 @@ body {
     margin: auto;
     justify-content: center;
     align-items: center;
+    overscroll-behavior: none;
+    overflow: hidden;
+
 }
 
 
@@ -108,9 +111,6 @@ body {
     transform: translateY(20px); /* starts 20px lower */
     animation: fadeInSlideUp 3s ease-out forwards;
 
-    pointer-events: none;
-    overscroll-behavior: contain;
-    overflow: hidden;
 
 }
 
@@ -118,7 +118,6 @@ body {
     to {
         opacity: 1;
         transform: translateY(0);
-        pointer-events: none;
     }
 }
 
@@ -263,6 +262,7 @@ body {
     text-align: center;
     justify-content: center;
     z-index: 1;
+
     /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
 
 }
@@ -291,7 +291,7 @@ body {
     margin-top: 15px; /* Slight space below the label */
     font-weight: bold; /* Example styling: bold text */
     color: darkslategrey;
-    text-align: left; /* Example color */
+    text-align: left;
 }
 
 .form-group-two select{
@@ -300,7 +300,7 @@ body {
     appearance: none; /* Standard */
 
     background: #82C6C5 url('./assets/down_arrow.png') no-repeat right 1em center;
-    background-size: 16px; /* Adjust icon size as needed */
+    background-size: 16px;
 
     width: 350px;
     height: 40px;
@@ -398,8 +398,8 @@ body {
 
 .form-group-two select option {
     border-color: white;
-    background-color: whitesmoke;  /* Background color for options when the dropdown is open */
-    color: #000;             /* Text color for options */
+    background-color: whitesmoke;  /* Background color for options */
+    color: #000;             /* Text color */
     max-height: 100%;
 
 }
