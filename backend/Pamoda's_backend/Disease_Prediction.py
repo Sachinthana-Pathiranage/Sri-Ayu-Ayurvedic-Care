@@ -4,7 +4,7 @@ import pandas as pd
 
 # Initialize Flask
 from flask_cors import CORS
-from db_utils import get_treatments
+from db_utils import get_treatments, get_diets, get_lifestyles
 app = Flask(__name__)
 CORS(app)
 
@@ -82,12 +82,15 @@ def predict():
 
         # Fetch treatments from the database
         treatments = get_treatments(predicted_disease, age_range, dosha_type)
-
+        diets = get_diets(predicted_disease, age_range, dosha_type)
+        lifestyles = get_lifestyles(predicted_disease, age_range, dosha_type)
         # Prepare the response
         response = {
             "prediction": predicted_disease,
             "probability": float(probability),
-            "treatments": treatments
+            "treatments": treatments,
+            "diets": diets,
+            "lifestyles": lifestyles
         }
         print(f"Backend Response: {response}")
         return jsonify(response), 200
