@@ -94,7 +94,7 @@ def get_diets(predicted_disease, age_group, dosha_type):
                 query = """
                 SELECT d.diet 
                 FROM diets d
-                JOIN diseases ON Diseases_id_diet = diseases.Disease_id
+                JOIN diseases ON Disease_id_diet = diseases.Disease_id
                 JOIN age_groups ON d.age_group_id_diet = age_groups.age_group_id
                 JOIN doshas ON d.dosha_id_diet = doshas.dosha_id
                 WHERE diseases.Disease_name = %s AND age_groups.age_range = %s AND doshas.dosha_type = %s
