@@ -71,13 +71,16 @@ def predict():
 
         # Extract only symptom-related fields for the check
         symptom_values = [input_data[feature] for feature in feature_names]
-        
+
         # When all symptoms are zero
-        if all(value == 0 for value in input_data.values()):
+        if all(value == 0 for value in symptom_values):
             return jsonify({
                 "prediction": "No Disease",
-                "probability": 1.0
-            }), 200
+                "probability": 1.0,
+                "treatments": [],
+                "diets": [],
+                "lifestyles": []
+            }), 200  
 
         # Scale the input features
         input_scaled = scaler.transform(input_df)
