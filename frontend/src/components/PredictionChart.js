@@ -22,27 +22,23 @@ const PredictionChart = ({ data }) => {
   ).flat();
 
   return (
-    <MDBContainer className="mt-4 d-flex justify-content-end"> {/* ⬅️ Move to Left */}
-      <MDBCard className="chart-card w-75"> {/* ✅ Adjust width */}
-        <MDBCardHeader className="bg-dark text-white text-center">
-          <h5>Tourism Forecast Chart</h5>
-        </MDBCardHeader>
-        <MDBCardBody className="d-flex justify-content-end"> {/* ⬅️ Align Left */}
+        <div>
+            <div className="chart-content">
           <LineChart width={800} height={400} data={chartData}> {/* ⬅️ Reduce Width */}
-            <CartesianGrid stroke="rgba(255, 255, 255, 0.2)" strokeDasharray="3 3" />
-            <XAxis dataKey="name" stroke="white" tick={{ fill: "white" }} />
-            <YAxis stroke="white" tick={{ fill: "white" }} />
-            <Tooltip contentStyle={{ backgroundColor: "black", color: "white" }} />
-            <Legend wrapperStyle={{ color: "white" }} />
+            <CartesianGrid stroke="gray" strokeDasharray="3 3" />
+            <XAxis dataKey="name" stroke="black" tick={{ fill: "black" }} />
+            <YAxis stroke="black" tick={{ fill: "black" }} />
+            <Tooltip contentStyle={{ backgroundColor: "black", color: "black" }} />
+            <Legend wrapperStyle={{ color: "black" }} />
             {/* Dynamically create the Line components */}
             {Object.keys(data.yearly_predictions).map((year) => {
               const dataKey = `Year ${year}`;
-              return <Line key={year} type="bumpX" dataKey={dataKey} stroke="purple" strokeWidth={3} />; // Dynamically set the dataKey
+              return <Line key={year} type="bumpX" dataKey={dataKey} stroke="purple" strokeWidth={2} />; // Dynamically set the dataKey
             })}
           </LineChart>
-        </MDBCardBody>
-      </MDBCard>
-    </MDBContainer>
+                </div>
+        </div>
+
   );
 };
 

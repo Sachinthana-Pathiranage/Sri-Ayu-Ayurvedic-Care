@@ -1,123 +1,159 @@
+
 body {
-  font-family: "Helvetica", sans-serif;
-  margin: 0;
-  padding: 0;
-  color: white;
-  background-color: 	#b2d8d8;
+    margin: 0;
+    font-family: "Inria Sans", sans-serif;
+    background-color: #B8E0DA;
+    /*overscroll-behavior: none;*/
+    flex-wrap: wrap;     /* on smaller screens */
 }
 
-.chart-card {
-  border-radius: 20px;
-  box-shadow: 10px 4px 10px rgba(1, 1, 1, 0.4); /* Light background */
-  background-image: url("Untitled design.png");
-  opacity: 0.7;
+/* General Form Styling */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  /* Light teal background */
+  margin-top: -40px;
 
-}
-
-.h-100 {
-  background-image: url("Untitled design.png");
-  background-color: black;
-  box-shadow: 10px 4px 10px rgba(1, 1, 1, 0.4);
-  border-radius: 20px;
-  height: 40vh;
-  margin-left: 50px;
-  opacity: 0.7;
-
-}
-
-.space-y-4{
-  margin-left: 50px;
-
-}
-
-.summary {
-  background-color: black;
-  box-shadow: 10px 4px 10px rgba(1, 1, 1, 0.4);
-  border-radius: 20px;
-  width: 57%;
-  padding: 20px;
-  margin-left: 20px;
-  height: 23vh; /* 🔥 Fixed height */
-  position: relative;
-  color: white;
-  display: flex; /* ✅ Keeps content aligned */
-  align-items: center; /* ✅ Centers content vertically */
-   /* ✅ Centers content horizontally */
-  text-align: center;
-  background-image: url("Untitled design.png");
-  opacity: 0.7;
-
-}
-.fixed-summary {
-  min-height: 150px; /* Adjust height to prevent shifting */
-}
-.summary-content {
-  min-height: 100px; /* Keeps space allocated even if empty */
-  margin-left: 80px;
 }
 
 .summary-container{
-   position: fixed;
-  bottom: 90px; /* Stick it at the bottom */
-  right: 730px; /* Align to the right */
-  width: 50%; /* Adjust as needed */
-  z-index: 1000; /* Ensure it stays on top */
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 20vh; /* Light teal background */
+  float:left;
 }
 
+.chart-container{
+  display: flex;
+  flex-direction: column;
+  background-color: #58C0B6;
+  justify-content: center;
+  height: 70vh;
+  border-radius: 20px;
+  width: 60%;
+  /* Light teal background */
+}
+.float-container {
+    padding: 20px;
+}
+.float-child {
+    width: 30%;
+    float: left;
+    padding: 20px;
 
-.mt-4 {
-  margin-top: -295px;
-  margin-left:590px;
-
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 20px;
 }
 
-.chart-card .card-header {
-  border-radius: 20px 20px 0 0;
-  padding: 15px;
+.chart-content{
+  margin-left: 50px;
+  border-radius: 20px;
+  justify-content: center;
+  width: 80%;
+  text-align: center;
 }
 
-.chart-card .card-body {
-  padding: 20px;
+.summary-content{
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 55vh;
+  height: 80vh;
+  margin-left:30px;
+  text-align: center;
+  justify-content: center;
+  background-color: #82C6C5;
 }
 
-.text-lg{
-  margin-left: 20px;
+/* Form Box */
+.form-content {
+  padding: 40px;
+  border-radius: 20px;
+  width: 350px;
+  text-align: center;
 }
 
-.para {
-  margin-left: 110px;
-}
-
-.mb-0{
-  margin-left:20px;
-
-}
-
-.button{
-  margin-left: 80px;
-  width: 50%;
-  border-radius: 30px;
-  background-color:black;
+/* Dropdown Styling */
+.custom-dropdown {
+  width: 107%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #82C6C5;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   color: white;
-  border: none;
-
-}
-
-.button:hover{
-  box-shadow: 0 2px 8px -1px ;
-}
-
-.year{
-
-  width: 70%;
-  height: 5vh;
-  border-radius: 15px;
-
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  appearance: none;
 }
 
 .months{
-  width: 34%;
-  border-radius: 15px;
-  height: 3vh;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #82C6C5;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  appearance: none;
+}
+
+/* Input Box Styling */
+.custom-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+/* Button Styling */
+.custom-button {
+  width: 50%;
+  padding: 17px;
+  border-radius: 25px;
+  background-color: #246B6A;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.custom-button:hover {
+  background-color: #6bb5a3;
+}
+
+.label-year{
+  font-color: gray;
+  padding-bottom: 12px;
+}
+
+.label-forecast{
+  font-color: gray;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.chart-sentence{
+  font-size: 30px;
+  color: white;
+  text-align: center;
+}
+
+.fore-image {
+  height: 400px;
+  width: 550px;
+  margin-left: 200px;
+  margin-top: -50px;
+  opacity: 60%;
 }

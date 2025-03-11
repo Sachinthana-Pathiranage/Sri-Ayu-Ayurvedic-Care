@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PredictionForm from './components/PredictionForm';
 import PredictionChart from './components/PredictionChart';
 import { fetchPredictions } from './components/api';
-import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardHeader } from 'mdb-react-ui-kit';
 
 
 function App() {
@@ -51,70 +50,47 @@ function App() {
       : 0;
   console.log(typeof predictionData, predictionData);
 
-  return (
-      <div className="bg-green-50 min-h-screen">
+  return (<div>
+    <div className="float-container">
 
-        <MDBContainer className="p-5">
-          <h1 className="text-2xl font-bold text-green-700 mb-4 text-center">
-            Ayurveda Tourism Forecasting
-          </h1>
-          <br/>
-
-          <MDBRow className="justify-content-center align-items-start">
-            {/* Left Side - Prediction Form */}
-            <MDBCol md="4">
-              <MDBCard className="shadow-lg">
-                <MDBCardBody>
-                  <div style={{width: '35%'}}>
-                    <PredictionForm onPredict={handlePrediction}/>
-                  </div>
-                </MDBCardBody>
-              </MDBCard>
-            </MDBCol>
-
-            {/* Right Side - Prediction Chart (Adjusted Width) */}
-            <MDBCol md="6" className="d-flex justify-content-center">
-              <MDBCard className="shadow-lg w-100">
-                <MDBCardHeader className="bg-dark text-white text-center"></MDBCardHeader>
-                <MDBCardBody className="d-flex justify-content-center">
-                  {predictionData ? (
-                      <div style={{width: '95%'}}> {/* ✅ Reduce Chart Width */}
-                        <PredictionChart data={predictionData}/>
-                      </div>
-                  ) : (
-                      <p className="text-muted text-center">No forecast data available.</p>
-                  )}
-                </MDBCardBody>
-              </MDBCard>
-            </MDBCol>
-          </MDBRow>
-        </MDBContainer>
+      <div className="float-child">
+        <PredictionForm onPredict={handlePrediction}/>
 
         <div className="summary-container">
-          <div className="summary">
-            <MDBCol md="4">
-              <MDBCard className="fixed-summary">
-                <MDBCardBody>
-                  <h2 className="text-lg font-semibold text-white">Summary</h2>
-                  <div className="summary-content">
-                    {predictionData ? (
-                        <>
-                          <p><strong>Total Predicted Tourists:</strong> {predictionData.total_tourists || 0}</p>
-                          <p><strong>Average Monthly
-                            Tourists:</strong> {predictionData.avg_tourists ? predictionData.avg_tourists.toFixed(2) : '0.00'}
-                          </p>
-                        </>
-                    ) : (
-                        <p className="text-muted">To see the summary, choose a year and forecast horizon.</p>
-                    )}
-                  </div>
-                </MDBCardBody>
-              </MDBCard>
-            </MDBCol>
+          <div className="summary-content">
+            <h2>Summary</h2>
+            {predictionData ? (
+                <>
+                  <p><strong>Total Predicted Tourists:</strong> {predictionData.total_tourists || 0}</p>
+                  <p><strong>Average Monthly
+                    Tourists:</strong> {predictionData.avg_tourists ? predictionData.avg_tourists.toFixed(2) : '0.00'}
+                  </p>
+                </>
+            ) : (
+                <p className="text-muted">To see the summary, choose a year and forecast horizon.</p>
+            )}
           </div>
         </div>
       </div>
-  );
+    </div>
+
+    {/* Right Side - Forecast Chart */}
+
+    <div className="chart-container">
+      {predictionData ? (
+          <PredictionChart data={predictionData}/>
+      ) : (
+          <div>
+            <p className="chart-sentence">Forecast will be displayed here</p>
+            <img src="/images/138249006_1031535333.png" alt="Loading animation" className="fore-image"/>
+          </div>
+      )}
+    </div>
+      </div>
+
+
+  )
+      ;
 }
 
 export default App;

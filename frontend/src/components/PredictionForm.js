@@ -1,24 +1,11 @@
-
 import React, { useState } from "react";
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCardHeader,
-  MDBCardImage,
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-  MDBTypography,
-} from "mdb-react-ui-kit";
-
-
 
 const PredictionForm = ({ onPredict }) => {
   const [formData, setFormData] = useState({
     forecast_horizon: 5,
     Year: 2025,
     Lag2: 900,
-    Rolling_Mean_12: 950,
+    Rolling_Mean_12: 1000,
     Month: 1
   });
 
@@ -40,57 +27,45 @@ const PredictionForm = ({ onPredict }) => {
   };
 
   return (
-    <section className="vh-100" >
-      <MDBContainer className="h2-100">
-        <MDBRow className="justify-content-center align-items-center h-100" style={{width: "90%"}}>
-          <MDBCol md="10" lg="8" xl="6" >
-            <MDBCard className="bg-dark3 text-white" style={{ borderRadius: "20px" }}>
-              <MDBCardHeader className="text-center" style={{ borderRadius: "20px" }}>
+    <form onSubmit={handleSubmit} className="form-container">
+    <div className="form-content">
+      <h2 className="text-center" style={{color: "white"}} >Let's Forecast Ayurvedic Tourists!</h2>
 
-                <MDBTypography tag="h4" className="mb-0 text-white"></MDBTypography>
-              </MDBCardHeader>
-              <MDBCardBody >
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <br/>
+      {/* Year Dropdown */}
+      <div className="input-group">
+        <div className="label-year"><b><label className="text-sm font-medium text-gray-700 mb-1">Year</label></b></div>
+        <select name="Year" value={formData.Year} onChange={handleChange} className="custom-dropdown">
+          <option value="" disabled hidden>Select</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+        </select>
+      </div>
+      {/* Forecast Horizon Input */}
+      <div className="input-group" style={{height: "100px"}}>
+        <div className="label-forecast">
+          <label><b>Forecast Horizon</b></label></div>
+        <input
+            type="number"
+            name="forecast_horizon"
+            value={formData.forecast_horizon}
+            onChange={handleChange}
+            min="1"
+            max="12"
+            className="months"
+        />
+      </div>
 
-                  <div>
-                    <h2><label className="text-white">Year :<select
-                        name="Year"
-                        value={formData.Year}
-                        onChange={handleChange}
-                        className="year"
-                    >
-                      {[2024, 2025, 2026, 2027].map((year) => (
-                          <option key={year} value={year}>{year}</option>
-                      ))}
-                    </select>
-                    </label></h2>
-
-                  </div>
-                  <div className="form" style={{height: "100px"}}>
-                    <h2><label className="text-white">Forecast Horizon: <input
-                        type="number"
-                        name="forecast_horizon"
-                        value={formData.forecast_horizon}
-                        onChange={handleChange}
-                        min="1"
-                        max="12"
-                        className="months"
-                    /></label></h2>
-
-                  </div>
+      {/* Predict Button */}
+      <button type="submit" className="custom-button" onClick={handleSubmit}>
+        Predict
+      </button>
+    </div>
+  </form>
 
 
-                  <button type="submit" className="button">
-                    <h2>Predict</h2>
-                  </button>
-                </form>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
-    </section>
+
   );
 };
 
