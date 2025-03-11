@@ -80,7 +80,7 @@ def predict():
                 "treatments": [],
                 "diets": [],
                 "lifestyles": []
-            }), 200  
+            }), 200
 
         # Scale the input features
         input_scaled = scaler.transform(input_df)
