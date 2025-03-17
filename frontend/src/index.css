@@ -20,6 +20,7 @@ body {
 }
 
 .summary-container{
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -157,3 +158,62 @@ body {
   margin-top: -50px;
   opacity: 60%;
 }
+
+.growth-table {
+
+  margin-top: 50px;
+  margin-left: 170px;
+  width: 80%;
+  border-collapse: collapse;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.growth-table h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #333;
+}
+
+.growth-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.growth-table th,
+.growth-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.growth-table th {
+  background-color: #58C0B6;
+  color: white;
+  font-weight: bold;
+}
+
+.growth-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.growth-table td {
+  font-size: 16px;
+}
+
+.growth-table td:nth-child(2) {
+  font-weight: bold;
+}
+
+.growth-table td.positive {
+  color: green;
+}
+
+.growth-table td.negative {
+  color: red;
+}
+
+

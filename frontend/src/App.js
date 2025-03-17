@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PredictionForm from './components/PredictionForm';
 import PredictionChart from './components/PredictionChart';
 import { fetchPredictions } from './components/api';
+import GrowthTable from './components/GrowthTable';
 
 
 function App() {
@@ -27,6 +28,9 @@ function App() {
           yearly_predictions: result.yearly_predictions,
           total_tourists: totalTourists,
           avg_tourists: avgTourists,
+          peak_month: yearlyData.peak_month,
+          low_month: yearlyData.low_month,
+          monthly_growth_percentage: yearlyData.monthly_growth_percentage,
         });
       } else {
         setPredictionData(null);
@@ -64,6 +68,8 @@ function App() {
                   <p><strong>Total Predicted Tourists:</strong> {predictionData.total_tourists || 0}</p>
                   <p><strong>Average Monthly
                     Tourists:</strong> {predictionData.avg_tourists ? predictionData.avg_tourists.toFixed(2) : '0.00'}
+                    <p><strong>Peak Month:</strong> {predictionData.peak_month}</p>
+                    <p><strong>Lowest Month:</strong> {predictionData.low_month}</p>
                   </p>
                 </>
             ) : (
@@ -74,6 +80,7 @@ function App() {
       </div>
     </div>
 
+
     {/* Right Side - Forecast Chart */}
 
     <div className="chart-container">
@@ -81,11 +88,17 @@ function App() {
           <PredictionChart data={predictionData}/>
       ) : (
           <div>
-            <p className="chart-sentence">Forecast will be displayed here</p>
             <img src="/images/138249006_1031535333.png" alt="Loading animation" className="fore-image"/>
           </div>
       )}
     </div>
+
+        <div className="growth-table-container">
+           {/* Growth Table */}
+      {predictionData && predictionData.monthly_growth_percentage && (
+        <GrowthTable data={predictionData.monthly_growth_percentage} />
+      )}
+          </div>
       </div>
 
 
