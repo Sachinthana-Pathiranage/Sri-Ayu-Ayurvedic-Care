@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/dosha_frontend/static/css/main.3b0c00c6.css",
+    "main.js": "/dosha_frontend/static/js/main.4057758c.js",
+    "static/js/453.65e869cb.chunk.js": "/dosha_frontend/static/js/453.65e869cb.chunk.js",
+    "static/media/img_three.png": "/dosha_frontend/static/media/img_three.58571375b56fe036d7ad.png",
+    "static/media/img_two.png": "/dosha_frontend/static/media/img_two.24740f732f15aa5de6f3.png",
+    "static/media/tree_bottom.png": "/dosha_frontend/static/media/tree_bottom.1aa7dcaf8bb2e24b68ad.png",
+    "static/media/img_one.png": "/dosha_frontend/static/media/img_one.fefff953258b54067c11.png",
+    "static/media/img_four.png": "/dosha_frontend/static/media/img_four.ac5ce869521bae52950c.png",
+    "static/media/search.png": "/dosha_frontend/static/media/search.ad6986e4270c77bc4116.png",
+    "static/media/tree_big.png": "/dosha_frontend/static/media/tree_big.2004668eab547d05116f.png",
+    "static/media/tree_small.png": "/dosha_frontend/static/media/tree_small.4f52b779411c14d5010e.png",
+    "static/media/arrow_right_purple.png": "/dosha_frontend/static/media/arrow_right_purple.5ad94d103a941bf8a9ff.png",
+    "static/media/down_arrow.png": "/dosha_frontend/static/media/down_arrow.515bb12bbc72fa1f2f9d.png",
+    "index.html": "/dosha_frontend/index.html",
+    "main.3b0c00c6.css.map": "/dosha_frontend/static/css/main.3b0c00c6.css.map",
+    "main.4057758c.js.map": "/dosha_frontend/static/js/main.4057758c.js.map",
+    "453.65e869cb.chunk.js.map": "/dosha_frontend/static/js/453.65e869cb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3b0c00c6.css",
+    "static/js/main.4057758c.js"
+  ]
+}
