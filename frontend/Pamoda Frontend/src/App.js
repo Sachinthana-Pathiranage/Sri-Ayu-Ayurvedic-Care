@@ -46,7 +46,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiUrl = 'http://localhost:5000/predict';
+    const apiUrl = 'http://localhost:5000/disease/predict';
 
     try {
       const fullSymptoms = symptomsList.reduce((acc, symptom) => {
@@ -86,7 +86,7 @@ function App() {
     setIsLoading(true); // Show loading state
 
     try {
-      const response = await fetch('http://localhost:5000/get_treatments', {
+      const response = await fetch('http://localhost:5000/disease/get_treatments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -284,9 +284,15 @@ function App() {
       <h3>Treatments</h3>
       <ul>
         {wellnessData.treatments ? (
-          wellnessData.treatments.split('\n').map((treatment, index) => (
-            <li key={index}>{treatment.trim()}</li>
-          ))
+          Array.isArray(wellnessData.treatments) ? (
+            wellnessData.treatments.map((treatment, index) => (
+              <li key={index}>{treatment}</li>
+            ))
+          ) : (
+            wellnessData.treatments.split('\n').map((treatment, index) => (
+              <li key={index}>{treatment.trim()}</li>
+            ))
+          )
         ) : (
           <li>No treatments available.</li>
         )}
@@ -296,9 +302,15 @@ function App() {
       <h3>Diets</h3>
       <ul>
         {wellnessData.diets ? (
-          wellnessData.diets.split('\n').map((diet, index) => (
-            <li key={index}>{diet.trim()}</li>
-          ))
+          Array.isArray(wellnessData.diets) ? (
+            wellnessData.diets.map((diet, index) => (
+              <li key={index}>{diet}</li>
+            ))
+          ) : (
+            wellnessData.diets.split('\n').map((diet, index) => (
+              <li key={index}>{diet.trim()}</li>
+            ))
+          )
         ) : (
           <li>No diets available.</li>
         )}
@@ -308,9 +320,15 @@ function App() {
       <h3>Lifestyles</h3>
       <ul>
         {wellnessData.lifestyles ? (
-          wellnessData.lifestyles.split('\n').map((lifestyle, index) => (
-            <li key={index}>{lifestyle.trim()}</li>
-          ))
+          Array.isArray(wellnessData.lifestyles) ? (
+            wellnessData.lifestyles.map((lifestyle, index) => (
+              <li key={index}>{lifestyle}</li>
+            ))
+          ) : (
+            wellnessData.lifestyles.split('\n').map((lifestyle, index) => (
+              <li key={index}>{lifestyle.trim()}</li>
+            ))
+          )
         ) : (
           <li>No lifestyles available.</li>
         )}
