@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
@@ -8,17 +10,19 @@ from db_utils import get_treatments, get_diets, get_lifestyles
 app = Flask(__name__)
 CORS(app)
 
-# Load the model, scaler, label encoder, and PCA
-model_path = r'C:\Users\prabh\Desktop\Sri-Ayu-Ayurvedic-Care\venv\Models\tuned_random_forest_model (1).pkl'
+# Get the directory where the script is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Load the model, scaler, label encoder, and PCA using absolute paths
+model_path = os.path.join(BASE_DIR, 'tuned_random_forest_model (1).pkl')
+scaler_path = os.path.join(BASE_DIR, 'scaler (1).pkl')
+label_encoder_path = os.path.join(BASE_DIR, 'label_encoder (1).pkl')
+pca_optimal_path = os.path.join(BASE_DIR, 'pca_model (1).pkl')
+
+# Load the models
 model = joblib.load(model_path)
-
-scaler_path = r'C:\Users\prabh\Desktop\Sri-Ayu-Ayurvedic-Care\venv\Models\scaler (1).pkl'
 scaler = joblib.load(scaler_path)
-
-label_encoder_path = r'C:\Users\prabh\Desktop\Sri-Ayu-Ayurvedic-Care\venv\Models\label_encoder (1).pkl'
 label_encoder = joblib.load(label_encoder_path)
-
-pca_optimal_path = r'C:\Users\prabh\Desktop\Sri-Ayu-Ayurvedic-Care\venv\Models\pca_model (1).pkl'
 pca_optimal = joblib.load(pca_optimal_path)
 
 # Define feature names (ensure they match the dataset columns)
@@ -38,18 +42,45 @@ def predict():
         input_data = request.json
         print("Received user input:", input_data)  # Debugging line
 
+        # Fill missing symptom fields with default value 0
+        for feature in feature_names:
+            if feature not in input_data:
+                input_data[feature] = 0
+
         # Validate input data
         if not all(feature in input_data for feature in feature_names):
             return jsonify({"error": "Input data is missing one or more required features."}), 400
 
+
+        # Extract age_group and dosha_type
+        age_range = input_data.get('age_group')
+        dosha_type = input_data.get('dosha_type')
+
+        # Debugging: Print the extracted values
+        print(f"Received age_group: {age_range}")
+        print(f"Received dosha_type: {dosha_type}")
+
+        if not age_range or not dosha_type:
+            return jsonify({"error": "age_group is a required fields."}), 400
+
+        # Default to "Generic" if dosha_type is not provided
+        if not dosha_type:
+            dosha_type = "Generic"
+
         # Convert input data into a DataFrame
         input_df = pd.DataFrame([input_data], columns=feature_names)
 
+        # Extract only symptom-related fields for the check
+        symptom_values = [input_data[feature] for feature in feature_names]
+
         # When all symptoms are zero
-        if all(value == 0 for value in input_data.values()):
+        if all(value == 0 for value in symptom_values):
             return jsonify({
                 "prediction": "No Disease",
-                "probability": 1.0
+                "probability": 1.0,
+                "treatments": [],
+                "diets": [],
+                "lifestyles": []
             }), 200
 
         # Scale the input features
@@ -64,6 +95,11 @@ def predict():
 
         # Decode the prediction
         predicted_disease = label_encoder.inverse_transform(prediction)[0]
+
+        # Fetch treatments from the database
+        treatments = get_treatments(predicted_disease, age_range, dosha_type)
+        diets = get_diets(predicted_disease, age_range, dosha_type)
+        lifestyles = get_lifestyles(predicted_disease, age_range, dosha_type)
 
         # Prepare the response
         response = {
