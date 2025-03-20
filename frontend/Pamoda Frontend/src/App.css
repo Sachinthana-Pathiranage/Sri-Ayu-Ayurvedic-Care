@@ -1,0 +1,619 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #B8E0DA;
+    /*overscroll-behavior: none;*/
+    flex-wrap: wrap;     /* on smaller screens */
+
+}
+
+.App {
+    padding: 20px;
+    text-align: center;
+    background-color: #B8E0DA;
+    overflow-x: hidden;
+
+}
+
+.App::-webkit-scrollbar {
+    display: none;
+}
+
+/*Background-Images-1*/
+.bg_top{
+    position: inherit;
+    max-width: 100vw;
+    overflow: hidden;
+}
+.bg_one{
+    position: absolute;
+    max-width: 50%;
+    top: -255px;
+    left: -260px;
+    transform: rotate(-40deg);
+}
+.bg_two{
+    z-index: 1;
+    position: absolute;
+    max-width: 60%;
+    top:-450px;
+    right: 90px;
+    transform: rotate(235deg);
+}
+
+.bg_three{
+    position: absolute;
+    max-width: 25%;
+    top: 480px;
+    left:195px;
+    opacity: 0;
+    rotate: -30deg;
+    transform: translateX(-20px); /* starts 20px lower */
+    animation: fadeInSlideRight 3s ease-out forwards;
+}
+
+@keyframes fadeInSlideRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.bg_four{
+    position: absolute;
+    max-width: 24%;
+    top: 315px;
+    right: 20px;
+    transform: translateX(20px); /* starts 20px lower */
+    animation: fadeInSlideRight 3s ease-out forwards;
+}
+
+@keyframes fadeInSlideRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* Container - Desc box + Classifier Box*/
+.split-container {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    overscroll-behavior: none;
+    overflow: hidden;
+
+}
+
+
+/* Description box */
+.description-container {
+    z-index: 2;
+    background-color: #58C0B6;
+    width: 420px;
+    max-height: 520px;/* Or adjust as desired */
+    /*border: 1px solid #ddd;*/
+    border-radius: 30px;
+    margin-top: 15px;
+    padding: 25px 50px 0 50px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;   /* Left-align content inside */
+
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px); /* starts 20px lower */
+    animation: fadeInSlideUp 3s ease-out forwards;
+
+
+}
+
+@keyframes fadeInSlideUp{
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.description-container h2{
+    color: white;
+    font-size: 20pt;
+    font-family: 'Lexend', sans-serif;
+    margin-bottom: 0;
+
+}.description-container p{
+     color: white;
+     font-size: 18pt;
+     margin-bottom: 25px;
+     font-family: 'Lexend', sans-serif;
+ }
+
+/* Image */
+.search {
+    width: 120px;
+    height: auto;
+    display: block;
+    margin: 5px auto 0 134px;
+
+    /* for the alt name*/
+    color: white;
+    font-size: large;
+}
+
+.button-and-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+/* Description button */
+.desc-btn {
+    padding: 25px 60px;
+    background-color: #51246B;
+    color: white;
+    max-width: 300px;
+    border: none;
+    border-radius: 70px;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+.desc-btn:hover{
+    background-color: #9243ca;
+}
+
+.desc-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Symptom Buttons Container */
+.symptom-buttons-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 10px; /* Space between buttons */
+    align-items: start;
+  }
+  
+  /* Symptom Buttons */
+  .symptom-btn {
+    padding: 10px 15px;
+    background-color: #82C6C5; /* Default background color */
+    color: white; /* Default text color */
+    border: 1px solid #82C6C5;
+    border-radius: 15px; /* Same as dropdowns */
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: normal;
+    word-break: break-word;
+    text-align: center;
+    height: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Same as dropdowns */
+  }
+  
+  .symptom-btn.selected {
+    background-color: #246B6A; /* Color when selected */
+    color: white;
+  }
+  
+  .symptom-btn:hover {
+    background-color: #246B6A; /* Hover color */
+    color: white;
+  }
+  
+  /* Adjust the last 2 buttons to span 2 columns */
+  .last-two-buttons {
+    grid-column: span 2; /* Each button spans 2 columns */
+  }
+
+.arrow_btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    background: url('./assets/arrow_right.png');
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    border-radius: 50%; /*circle*/
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    margin-bottom: 30px;
+}
+
+.arrow_btn:hover .arrow_right {
+    opacity: 0; /* Hide the initial arrow */
+}
+
+.arrow_btn:hover::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;  /* Allow clicks to pass through */
+    width: 59px; /*Hovering arrow*/
+    height: 59px;
+    background: url('./assets/arrow_right_purple.png') no-repeat center/cover;
+}
+
+.arrow_btn:active {
+    transform: scale(0.95); /*clicking effect*/
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.arrow_right{
+    width: 59px;
+    height: auto;
+}
+
+/*Background-Images-2*/
+.tree_container{
+
+    position: relative;
+    width: 100vw;
+    pointer-events: none;
+    overflow-y: visible;
+    z-index: 0;
+
+}
+.tree_big{
+    position: absolute;
+    max-width: 12%;
+    top: 220px;
+    right: 10px;
+    transform: rotate(-143deg);
+
+}
+
+.tree_small{
+    position: absolute;
+    max-width: 10%;
+    right: 60px;
+    top: 150px;
+    margin-right: -10px;
+    transform: rotate(-102deg);
+}
+
+.tree_bottom{
+    position: absolute;
+    max-width: 38%;
+    top: 583px;
+    left: -40px;
+    z-index: 0;
+}
+
+/*Classifier-Box*/
+.classifier-container {
+    background-color: transparent;
+    color: #fff;
+    flex: 1 1 400px;
+    max-width: 100vh;
+    max-height: 1000px;
+    border-radius: 8px;
+    padding: 20px;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    z-index: 1;
+
+    /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
+
+}
+
+.classifier-container h1{
+    margin-top: 40px;
+    font-size: 25pt;
+    justify-content: center;
+}
+
+.form-group-two {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    margin: auto;
+    justify-content: center;
+    justify-items: center;
+
+}
+
+.form-group-two label {
+    display: block;
+    font-size: small;
+    margin-left: 5px;
+    margin-bottom: 15px;
+    margin-top: 15px; /* Slight space below the label */
+    font-weight: bold; /* Example styling: bold text */
+    color: darkslategrey;
+    text-align: left;
+}
+
+.form-group-two select{
+    -webkit-appearance: none;  /* Chrome, Safari, Opera */
+    -moz-appearance: none;     /* Firefox */
+    appearance: none; /* Standard */
+
+    background: #82C6C5 url('./assets/down_arrow.png') no-repeat right 1em center;
+    background-size: 16px;
+
+    width: 350px;
+    height: 40px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    padding: 10px;
+    border: 1px solid #82C6C5;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /*Slightly smaller one*/
+    transform: none;
+
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+
+/* Form-part-1 Animations */
+.form-part-one> div{
+    opacity: 0;
+    transform: translateX(-100%);
+}
+.form-part-one.animate> div{
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: slideInLeft 0.75s forwards;
+}
+
+
+.form-part-one.animate >div:nth-of-type(1) {
+    animation-delay: 0.5s;
+}
+.form-part-one.animate >div:nth-of-type(2) {
+    animation-delay: 0.75s;
+}
+.form-part-one.animate >div:nth-of-type(3) {
+    animation-delay: 1.0s;
+}
+.form-part-one.animate >div:nth-of-type(4) {
+    animation-delay: 1.25s;
+}
+.form-part-one.animate >div:nth-of-type(5) {
+    animation-delay: 1.5s;
+}
+
+
+/* Form-part-2 Animations */
+.form-part-two> div{
+    opacity: 0;
+    transform: translateX(100%);
+}
+.form-part-two.animate> div{
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideInRight 0.75s forwards;
+}
+
+
+.form-part-two.animate >div:nth-of-type(1) {
+    animation-delay: 0.5s;
+}
+.form-part-two.animate >div:nth-of-type(2) {
+    animation-delay: 0.75s;
+}
+.form-part-two.animate >div:nth-of-type(3) {
+    animation-delay: 1.0s;
+}
+.form-part-two.animate >div:nth-of-type(4) {
+    animation-delay: 1.25s;
+}
+.form-part-two.animate >div:nth-of-type(5) {
+    animation-delay: 1.5s;
+}
+
+
+.form-group-two select option {
+    border-color: white;
+    background-color: whitesmoke;  /* Background color for options */
+    color: #000;             /* Text color */
+    max-height: 100%;
+
+}
+
+.form-group-two option:hover {
+    background-color: cornflowerblue; /*Doesn't Work*/
+}
+
+/* Dosha Predict button */
+.dosha-btn {
+    padding: 30px 50px;
+    background-color: #246B6A;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    width: 250px;
+    cursor: pointer;
+    font-size: 13pt;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 40px;
+
+}
+.dosha-btn:hover {
+    background-color: #9243ca;
+}
+
+.dosha-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+
+/* Result Box */
+.result {
+    background-color: #82C6C5; /* Slightly transparent white */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+    color: white; /* White text for better contrast */
+    opacity: 0; /* Start invisible */
+    transform: translateY(20px); /* Start 20px lower */
+    animation: fadeInSlideUp 0.75s ease-out forwards; /* Apply the animation */
+  }
+  
+  .result h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #246B6A; /* Dark green */
+    margin-bottom: 10px;
+  }
+  
+  .result p {
+    font-size: 1.2rem;
+    color: #333; /* Dark gray */
+    font-weight: bold;
+  }
+
+  /* Wellness Plan Dropdown Buttons */
+.wellness-buttons-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .dropdown-container {
+    position: relative;
+  }
+  
+  .wellness-dropdown-btn {
+    width: 80%;
+    padding: 10px 15px;
+    background-color: #82C6C5;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Same shadow */
+  }
+  
+  .wellness-dropdown-btn:hover {
+    background-color: #246B6A;
+  }
+  
+  .dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+  }
+  
+  .dropdown-option {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: white;
+    color: #246B6A;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown-option:hover {
+    background-color: #f0f0f0;
+  }
+
+  /* Apply animations to wellness plan dropdowns */
+.wellness-buttons-container .dropdown-container {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  
+  .wellness-buttons-container .dropdown-container.animate {
+    animation: slideInRight 0.75s forwards;
+  }
+  
+  .wellness-buttons-container .dropdown-container:nth-child(1) {
+    animation-delay: 0.5s; /* Delay for the first dropdown */
+  }
+  
+  .wellness-buttons-container .dropdown-container:nth-child(2) {
+    animation-delay: 0.75s; /* Delay for the second dropdown */
+  }
+
+  /* Wellness Plan Boxes */
+.wellness-plan-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px; /* Space between boxes */
+    margin-top: 30px;
+  }
+  
+  .wellness-box {
+    background-color: #82C6C5;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    color: white;
+  }
+  
+  .wellness-box h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .wellness-box ul {
+    list-style-type: disc; /* Bullet points */
+    padding-left: 20px; /* Indent the bullet points */
+    margin: 0; /* Remove default margin */
+  }
+  
+  .wellness-box ul li {
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 8px; /* Space between list items */
+  }
