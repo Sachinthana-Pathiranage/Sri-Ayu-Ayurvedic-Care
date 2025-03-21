@@ -58,6 +58,28 @@ def serve_tourism_static(path):
     )
     return send_from_directory(tourism_build_dir, path)
 
+@app.route("/recommendation_frontend")
+def serve_disease_index():
+    disease_build_dir = os.path.join(
+        os.path.dirname(__file__),
+        "..",
+        "frontend-final",
+        "disease_page",
+        "build"
+    )
+    return send_from_directory(disease_build_dir, "index.html")
+
+@app.route("/recommendation_frontend/<path:path>")
+def serve_disease_static(path):
+    disease_build_dir = os.path.join(
+        os.path.dirname(__file__),
+        "..",
+        "frontend-final",
+        "disease_page",
+        "build"
+    )
+    return send_from_directory(disease_build_dir, path)
+
 @app.route('/')
 def home():
     return """
