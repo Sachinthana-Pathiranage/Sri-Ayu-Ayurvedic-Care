@@ -264,30 +264,37 @@ body {
     z-index: 0;
 
 }
-.tree_big{
-    position: absolute;
-    max-width: 12%;
-    top: 220px;
-    right: 10px;
-    transform: rotate(-143deg);
 
+.tree_big, .tree_small, .tree_bottom {
+  position: fixed;
+  z-index: -1;
+  transition: opacity 0.5s ease;
 }
 
-.tree_small{
-    position: absolute;
-    max-width: 10%;
-    right: 60px;
-    top: 150px;
-    margin-right: -10px;
-    transform: rotate(-102deg);
+.tree_big {
+  max-width: 12%;
+  top: 220px;
+  right: 10px;
+  transform: rotate(-143deg);
 }
 
-.tree_bottom{
-    position: absolute;
-    max-width: 38%;
-    top: 583px;
-    left: -40px;
-    z-index: 0;
+.tree_small {
+  max-width: 10%;
+  right: 60px;
+  top: 150px;
+  margin-right: -10px;
+  transform: rotate(-102deg);
+}
+
+.tree_bottom {
+  max-width: 38%;
+  top: 583px;
+  left: -40px;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /*Classifier-Box*/
@@ -385,6 +392,7 @@ body {
 .form-part-one> div{
     opacity: 0;
     transform: translateX(-100%);
+    animation-delay: 0s !important;
 }
 .form-part-one.animate> div{
     opacity: 0;
@@ -473,6 +481,36 @@ body {
 .dosha-btn:active {
     transform: scale(0.95);
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Wellness Plan Button */
+.wellness-btn {
+  padding: 30px 50px;
+  background-color: #246B6A;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 13pt;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.wellness-btn:hover {
+  background-color: #9243ca;
+}
+
+.wellness-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.wellness-btn:disabled {
+  background-color: #82C6C5; /* Disabled state color */
+  cursor: not-allowed;
 }
 
 

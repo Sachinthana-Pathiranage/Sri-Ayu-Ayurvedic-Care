@@ -22,7 +22,9 @@ function App() {
   const [showDoshaDropdown, setShowDoshaDropdown] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [wellnessData, setWellnessData] = useState(null); // State to store wellness plan data
+  const [wellnessData, setWellnessData] = useState(null);
+  const [scrollDirection, setScrollDirection] = useState('up');
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   const classifierRef = useRef(null);
   const resultRef = useRef(null);
@@ -37,6 +39,43 @@ function App() {
     'weak_muscles', 'irritability', 'frequent_urination', 'vision_changes'
   ];
 
+  // Scroll direction detection
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+
+      if (currentScrollPos > prevScrollPos) {
+        setScrollDirection('down');
+      } else {
+        setScrollDirection('up');
+      }
+
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollPos]);
+
+  // Trigger animation when scrolling
+  useEffect(() => {
+    const handleScroll = () => {
+      if (classifierRef.current) {
+        const rect = classifierRef.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom >= 0) {
+          triggerAnimation();
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const handleSymptomClick = (symptom) => {
     setSelectedSymptoms((prev) => ({
       ...prev,
@@ -46,7 +85,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiUrl = 'http://localhost:5000/disease/predict';
+    const apiUrl = 'http://localhost:5000/predict';
 
     try {
       const fullSymptoms = symptomsList.reduce((acc, symptom) => {
@@ -83,10 +122,10 @@ function App() {
       return;
     }
 
-    setIsLoading(true); // Show loading state
+    setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/disease/get_treatments', {
+      const response = await fetch('http://localhost:5000/get_treatments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -97,19 +136,15 @@ function App() {
       });
 
       const result = await response.json();
-      console.log("Wellness Plan Response:", result);
-
-      // Set the wellness plan data
       setWellnessData(result);
     } catch (error) {
       console.error('Error fetching wellness plan:', error);
       alert("An error occurred while fetching the wellness plan.");
     } finally {
-      setIsLoading(false); // Hide loading state
+      setIsLoading(false);
     }
   };
 
-  // Use useEffect to scroll to the result box after predictionMade becomes true
   useEffect(() => {
     if (predictionMade && resultRef.current) {
       resultRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -126,27 +161,6 @@ function App() {
       classifierRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  useEffect(() => {
-    const currentRef = classifierRef.current;
-    if (!currentRef) return;
-
-    const observerOptions = { root: null, threshold: 0.2 };
-    const observerCallback = (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          triggerAnimation();
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    observer.observe(currentRef);
-
-    return () => {
-      observer.unobserve(currentRef);
-    };
-  }, []);
 
   return (
     <div className="App">
@@ -180,9 +194,21 @@ function App() {
           <img src={bg_four} alt="bg_four_img" className="bg_four" />
         </div>
         <div className="tree_container">
-          <img src={tree_big} alt="img_tree" className="tree_big" />
-          <img src={tree_small} alt="img_tree_2" className="tree_small" />
-          <img src={tree_bottom} alt="img_tree_3" className="tree_bottom" />
+          <img
+            src={tree_big}
+            alt="img_tree"
+            className={`tree_big ${scrollDirection === 'up' ? 'hidden' : ''}`}
+          />
+          <img
+            src={tree_small}
+            alt="img_tree_2"
+            className={`tree_small ${scrollDirection === 'up' ? 'hidden' : ''}`}
+          />
+          <img
+            src={tree_bottom}
+            alt="img_tree_3"
+            className={`tree_bottom ${scrollDirection === 'up' ? 'hidden' : ''}`}
+          />
         </div>
         <div id="classifier-container" className="classifier-container" ref={classifierRef}>
           <h1>Let's Discover Your Disease !</h1>
@@ -216,8 +242,6 @@ function App() {
           <p>{diseaseResult}</p>
           <h2>Probability:</h2>
           <p>{(probability * 100).toFixed(2)}%</p>
-
-          {/* Wellness Plan Button */}
           <button
             type="button"
             className="wellness-btn"
@@ -238,7 +262,6 @@ function App() {
           <form onSubmit={handleWellnessSubmit}>
             <div className="form-group-two">
               <div className="form-part-one animate">
-                {/* Age Dropdown */}
                 <div>
                   <label htmlFor="ageRange">Age:</label>
                   <select
@@ -253,8 +276,6 @@ function App() {
                     <option value="50+">50+</option>
                   </select>
                 </div>
-
-                {/* Dosha Type Dropdown */}
                 <div>
                   <label htmlFor="doshaType">Dosha Type (Optional):</label>
                   <select
@@ -270,72 +291,68 @@ function App() {
                 </div>
               </div>
             </div>
-
-            {/* Submit Button */}
             <button type="submit" className="wellness-submit-btn" disabled={isLoading}>
               {isLoading ? 'Loading...' : 'Get Wellness Plan'}
             </button>
           </form>
-
-          {/* Wellness Plan Boxes */}
           {wellnessData && (
-  <div className="wellness-plan-boxes">
-    <div className="wellness-box">
-      <h3>Treatments</h3>
-      <ul>
-        {wellnessData.treatments ? (
-          Array.isArray(wellnessData.treatments) ? (
-            wellnessData.treatments.map((treatment, index) => (
-              <li key={index}>{treatment}</li>
-            ))
-          ) : (
-            wellnessData.treatments.split('\n').map((treatment, index) => (
-              <li key={index}>{treatment.trim()}</li>
-            ))
-          )
-        ) : (
-          <li>No treatments available.</li>
-        )}
-      </ul>
-    </div>
-    <div className="wellness-box">
-      <h3>Diets</h3>
-      <ul>
-        {wellnessData.diets ? (
-          Array.isArray(wellnessData.diets) ? (
-            wellnessData.diets.map((diet, index) => (
-              <li key={index}>{diet}</li>
-            ))
-          ) : (
-            wellnessData.diets.split('\n').map((diet, index) => (
-              <li key={index}>{diet.trim()}</li>
-            ))
-          )
-        ) : (
-          <li>No diets available.</li>
-        )}
-      </ul>
-    </div>
-    <div className="wellness-box">
-      <h3>Lifestyles</h3>
-      <ul>
-        {wellnessData.lifestyles ? (
-          Array.isArray(wellnessData.lifestyles) ? (
-            wellnessData.lifestyles.map((lifestyle, index) => (
-              <li key={index}>{lifestyle}</li>
-            ))
-          ) : (
-            wellnessData.lifestyles.split('\n').map((lifestyle, index) => (
-              <li key={index}>{lifestyle.trim()}</li>
-            ))
-          )
-        ) : (
-          <li>No lifestyles available.</li>
-        )}
-      </ul>
-    </div>
-  </div>
-)}
+            <div className="wellness-plan-boxes">
+              <div className="wellness-box">
+                <h3>Treatments</h3>
+                <ul>
+                  {wellnessData.treatments ? (
+                    Array.isArray(wellnessData.treatments) ? (
+                      wellnessData.treatments.map((treatment, index) => (
+                        <li key={index}>{treatment}</li>
+                      ))
+                    ) : (
+                      wellnessData.treatments.split('\n').map((treatment, index) => (
+                        <li key={index}>{treatment.trim()}</li>
+                      ))
+                    )
+                  ) : (
+                    <li>No treatments available.</li>
+                  )}
+                </ul>
+              </div>
+              <div className="wellness-box">
+                <h3>Diets</h3>
+                <ul>
+                  {wellnessData.diets ? (
+                    Array.isArray(wellnessData.diets) ? (
+                      wellnessData.diets.map((diet, index) => (
+                        <li key={index}>{diet}</li>
+                      ))
+                    ) : (
+                      wellnessData.diets.split('\n').map((diet, index) => (
+                        <li key={index}>{diet.trim()}</li>
+                      ))
+                    )
+                  ) : (
+                    <li>No diets available.</li>
+                  )}
+                </ul>
+              </div>
+              <div className="wellness-box">
+                <h3>Lifestyles</h3>
+                <ul>
+                  {wellnessData.lifestyles ? (
+                    Array.isArray(wellnessData.lifestyles) ? (
+                      wellnessData.lifestyles.map((lifestyle, index) => (
+                        <li key={index}>{lifestyle}</li>
+                      ))
+                    ) : (
+                      wellnessData.lifestyles.split('\n').map((lifestyle, index) => (
+                        <li key={index}>{lifestyle.trim()}</li>
+                      ))
+                    )
+                  ) : (
+                    <li>No lifestyles available.</li>
+                  )}
+                </ul>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
