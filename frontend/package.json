@@ -2,10 +2,12 @@
   "name": "backend-sri-ayu",
   "version": "1.0.0",
   "description": "",
+  "homepage": "/tourism_frontend",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.7",
     "axios": "^1.8.1",
+    "framer-motion": "^12.5.0",
     "mdb-react-ui-kit": "^9.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

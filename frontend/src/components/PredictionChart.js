@@ -23,7 +23,7 @@ const PredictionChart = ({ data }) => {
 
   return (
         <div>
-            <div className="chart-content">
+            <div className="chart-content fade-in">
           <LineChart width={800} height={400} data={chartData}> {/* ⬅️ Reduce Width */}
             <CartesianGrid stroke="gray" strokeDasharray="3 3" />
             <XAxis dataKey="name" stroke="black" tick={{ fill: "black" }} />

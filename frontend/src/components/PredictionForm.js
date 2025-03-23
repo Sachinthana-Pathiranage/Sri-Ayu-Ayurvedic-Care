@@ -29,14 +29,10 @@ const PredictionForm = ({ onPredict }) => {
   return (
     <form onSubmit={handleSubmit} className="form-container">
     <div className="form-content">
-      <h2 className="text-center" style={{color: "white"}} >Let's Forecast Ayurvedic Tourists!</h2>
-
       {/* Year Dropdown */}
       <div className="input-group">
         <div className="label-year"><b><label className="text-sm font-medium text-gray-700 mb-1">Year</label></b></div>
         <select name="Year" value={formData.Year} onChange={handleChange} className="custom-dropdown">
-          <option value="" disabled hidden>Select</option>
-          <option value="2024">2024</option>
           <option value="2025">2025</option>
           <option value="2026">2026</option>
           <option value="2027">2027</option>

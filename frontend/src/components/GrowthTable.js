@@ -4,7 +4,7 @@ const GrowthTable = ({ data }) => {
   if (!data) return <p>No growth data available.</p>;
 
   return (
-    <div className="growth-table">
+    <div className="growth-table fade-in">
       <h2>Monthly Growth Percentage</h2>
       <table>
         <thead>
