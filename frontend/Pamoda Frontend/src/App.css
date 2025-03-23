@@ -15,7 +15,6 @@ body {
     text-align: center;
     background-color: #B8E0DA;
     overflow-x: hidden;
-
 }
 
 .App::-webkit-scrollbar {
@@ -83,7 +82,7 @@ body {
 .split-container {
     display: flex;
     flex-direction: column;
-    gap: 80px;
+    gap: 200px;
     margin: auto;
     justify-content: center;
     align-items: center;
@@ -150,7 +149,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 10px;
 }
 
 /* Description button */
@@ -472,7 +471,7 @@ body {
     font-weight: bold;
     margin-top: 50px;
     margin-bottom: 40px;
-
+    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.1s ease;
 }
 .dosha-btn:hover {
     background-color: #9243ca;
@@ -509,6 +508,36 @@ body {
 }
 
 .wellness-btn:disabled {
+  background-color: #82C6C5; /* Disabled state color */
+  cursor: not-allowed;
+}
+
+/* Ensure .wellness-submit-btn matches .dosha-btn */
+.wellness-submit-btn {
+  padding: 30px 50px;
+  background-color: #246B6A;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 13pt;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.wellness-submit-btn:hover {
+  background-color: #9243ca;
+}
+
+.wellness-submit-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.wellness-submit-btn:disabled {
   background-color: #82C6C5; /* Disabled state color */
   cursor: not-allowed;
 }
@@ -624,7 +653,10 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 columns */
     gap: 20px; /* Space between boxes */
-    margin-top: 30px;
+    margin-top: 100px;
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
   }
   
   .wellness-box {
@@ -655,3 +687,78 @@ body {
     font-weight: bold;
     margin-bottom: 8px; /* Space between list items */
   }
+
+  .wellness-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  min-height: 100vh; /* Take up the full viewport height */
+  padding: 20px; /* Add some padding */
+  background-color: #B8E0DA; /* Match the background color */
+}
+
+  .wellness-form h2 {
+  font-size: 25pt; /* Match the font size */
+  color: white; /* Match the color */
+  font-family: 'Lexend', sans-serif; /* Match the font family */
+  margin-top: 40px; /* Match the margin */
+  text-align: center; /* Center the text */
+  justify-content: center; /* Center the content */
+}
+
+  /* Add margin to the age dropdown container */
+.wellness-form .form-part-one > div:first-child {
+  margin-bottom: 50px; /* Adjust this value as needed */
+}
+
+/* Add margin to the dosha dropdown container */
+.wellness-form .form-part-one > div:last-child {
+  margin-bottom: 30px; /* Adjust this value as needed */
+}
+
+/* Add margin to the "Get Wellness Plan" button */
+.wellness-submit-btn {
+  margin-top: 20px; /* Adjust this value as needed */
+}
+
+/* Updated styles for dropdowns */
+.wellness-form select {
+  -webkit-appearance: none;  /* Chrome, Safari, Opera */
+  -moz-appearance: none;     /* Firefox */
+  appearance: none; /* Standard */
+
+  background: #82C6C5 url('./assets/down_arrow.png') no-repeat right 1em center;
+  background-size: 16px;
+
+  width: 350px;
+  height: 40px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  padding: 10px;
+  border: 1px solid #82C6C5;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Same as symptom buttons */
+  transition: background-color 1.0s ease, color 1.0s ease; /* Add transition */
+}
+/* Dropdown options container */
+.wellness-form select option {
+  background-color: white; /* Match dropdown background */
+  color: #82C6C5; /* Match dropdown text color */
+  font-weight: bold; /* Match dropdown font weight */
+}
+
+/* Hover state for dropdowns */
+.wellness-form select:hover {
+  background-color: #246B6A; /* Hover color */
+  color: white;
+}
+
+/* Active state for dropdowns */
+.wellness-form select:active {
+  transform: scale(0.95); /* Click effect */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Click effect */
+}
+

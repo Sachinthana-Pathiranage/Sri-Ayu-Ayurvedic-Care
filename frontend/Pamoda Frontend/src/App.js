@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
+import NavBar from "./NavBar";
 import search from './assets/search.png';
 import arrow_right from './assets/arrow_right.png';
 import bg_one from './assets/img_one.png';
@@ -29,6 +30,7 @@ function App() {
   const classifierRef = useRef(null);
   const resultRef = useRef(null);
   const wellnessFormRef = useRef(null);
+  const wellnessBoxesRef = useRef(null);
 
   const symptomsList = [
     'shivers', 'acidity', 'tiredness', 'weight_loss', 'lethargy', 'cough',
@@ -106,11 +108,19 @@ function App() {
       });
 
       const result = await response.json();
+
+      // Check for error in the response
+    if (result.error) {
+      alert(result.error); // Display the error message
+      return; // Stop further execution
+    }
+
       setDiseaseResult(result.prediction);
       setProbability(result.probability);
       setPredictionMade(true);
     } catch (error) {
       console.error('Error fetching disease', error);
+      alert("An error occurred while fetching the disease prediction.");
     }
   };
 
@@ -137,6 +147,14 @@ function App() {
 
       const result = await response.json();
       setWellnessData(result);
+
+    // Add a small delay before scrolling to ensure the DOM is updated
+    setTimeout(() => {
+      if (wellnessBoxesRef.current) {
+        wellnessBoxesRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100); // 100ms delay
+
     } catch (error) {
       console.error('Error fetching wellness plan:', error);
       alert("An error occurred while fetching the wellness plan.");
@@ -151,6 +169,12 @@ function App() {
     }
   }, [predictionMade]);
 
+  useEffect(() => {
+  if (showWellnessForm && wellnessFormRef.current) {
+    wellnessFormRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
+}, [showWellnessForm]);
+
   const triggerAnimation = () => {
     setAnimationKey(prev => prev + 1);
   };
@@ -164,6 +188,9 @@ function App() {
 
   return (
     <div className="App">
+      {/* Add the Navbar component here */}
+      <NavBar />
+
       <div className="split-container">
         <div className="bg_top">
           <img src={bg_one} alt="bg_one_img" className="bg_one" />
@@ -296,7 +323,7 @@ function App() {
             </button>
           </form>
           {wellnessData && (
-            <div className="wellness-plan-boxes">
+            <div className="wellness-plan-boxes" ref={wellnessBoxesRef}>
               <div className="wellness-box">
                 <h3>Treatments</h3>
                 <ul>
