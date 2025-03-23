@@ -46,7 +46,6 @@ body {
 }
 
 .bg_three{
-    background-image: url('./assets/img_three.png');
     position: absolute;
     max-width: 25%;
     top: 480px;
@@ -65,7 +64,6 @@ body {
 }
 
 .bg_four{
-    background-image: url('./assets/img_four.png');
     position: absolute;
     max-width: 24%;
     top: 315px;
@@ -139,7 +137,6 @@ body {
 
 /* Image */
 .search {
-    background-image: url("./assets/search.png");
     width: 120px;
     height: auto;
     display: block;
@@ -276,7 +273,6 @@ body {
 }
 
 .tree_big {
-    background-image: url("./assets/tree_big.png");
   max-width: 12%;
   top: 220px;
   right: 10px;
@@ -284,7 +280,6 @@ body {
 }
 
 .tree_small {
-    background-image: url("./assets/tree_small.png");
   max-width: 10%;
   right: 60px;
   top: 150px;
@@ -293,7 +288,6 @@ body {
 }
 
 .tree_bottom {
-    background-image: url("./assets/tree_bottom.png");
   max-width: 38%;
   top: 583px;
   left: -40px;

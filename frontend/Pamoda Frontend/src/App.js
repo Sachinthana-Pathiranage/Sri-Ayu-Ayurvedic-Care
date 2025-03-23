@@ -19,6 +19,8 @@ function App() {
   const [showWellnessForm, setShowWellnessForm] = useState(false);
   const [ageRange, setAgeRange] = useState('');
   const [doshaType, setDoshaType] = useState('');
+  const [showAgeDropdown, setShowAgeDropdown] = useState(false);
+  const [showDoshaDropdown, setShowDoshaDropdown] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [wellnessData, setWellnessData] = useState(null);
