@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import NavBar from "./NavBar";
-import search from './assets/search.png';
-import arrow_right from './assets/arrow_right.png';
-import bg_one from './assets/img_one.png';
-import bg_two from './assets/img_two.png';
-import bg_three from './assets/img_three.png';
-import bg_four from './assets/img_four.png';
-import tree_big from './assets/tree_big.png';
-import tree_small from './assets/tree_small.png';
-import tree_bottom from './assets/tree_bottom.png';
+import search from './assets/search.png'; // Relative path
+import arrow_right from './assets/arrow_right.png'; // Relative path
+import bg_one from './assets/img_one.png'; // Relative path
+import bg_two from './assets/img_two.png'; // Relative path
+import bg_three from './assets/img_three.png'; // Relative path
+import bg_four from './assets/img_four.png'; // Relative path
+import tree_big from './assets/tree_big.png'; // Relative path
+import tree_small from './assets/tree_small.png'; // Relative path
+import tree_bottom from './assets/tree_bottom.png'; // Relative path
 
 function App() {
   const [selectedSymptoms, setSelectedSymptoms] = useState({});
@@ -19,8 +19,6 @@ function App() {
   const [showWellnessForm, setShowWellnessForm] = useState(false);
   const [ageRange, setAgeRange] = useState('');
   const [doshaType, setDoshaType] = useState('');
-  const [showAgeDropdown, setShowAgeDropdown] = useState(false);
-  const [showDoshaDropdown, setShowDoshaDropdown] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [wellnessData, setWellnessData] = useState(null);
@@ -110,10 +108,10 @@ function App() {
       const result = await response.json();
 
       // Check for error in the response
-    if (result.error) {
-      alert(result.error); // Display the error message
-      return; // Stop further execution
-    }
+      if (result.error) {
+        alert(result.error); // Display the error message
+        return; // Stop further execution
+      }
 
       setDiseaseResult(result.prediction);
       setProbability(result.probability);
@@ -148,12 +146,12 @@ function App() {
       const result = await response.json();
       setWellnessData(result);
 
-    // Add a small delay before scrolling to ensure the DOM is updated
-    setTimeout(() => {
-      if (wellnessBoxesRef.current) {
-        wellnessBoxesRef.current.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100); // 100ms delay
+      // Add a small delay before scrolling to ensure the DOM is updated
+      setTimeout(() => {
+        if (wellnessBoxesRef.current) {
+          wellnessBoxesRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100); // 100ms delay
 
     } catch (error) {
       console.error('Error fetching wellness plan:', error);
@@ -170,10 +168,10 @@ function App() {
   }, [predictionMade]);
 
   useEffect(() => {
-  if (showWellnessForm && wellnessFormRef.current) {
-    wellnessFormRef.current.scrollIntoView({ behavior: 'smooth' });
-  }
-}, [showWellnessForm]);
+    if (showWellnessForm && wellnessFormRef.current) {
+      wellnessFormRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [showWellnessForm]);
 
   const triggerAnimation = () => {
     setAnimationKey(prev => prev + 1);
