@@ -76,34 +76,73 @@ def forecast_tourists(initial_data, forecast_horizon):
 
     return response_data, predictions, confidence_intervals
 
+@tourism_bp.route('/latest-data', methods=['GET'])
+def get_latest_data():
+    # Fetch the latest data from your source (e.g., database or static data)
+    latest_data = {
+        'Lag1': 850,  # Example value, replace with actual data fetching logic
+        'Lag2': 900,  # Example value, replace with actual data fetching logic
+        'Rolling_Mean_12': 1000  # Example value, replace with actual data fetching logic
+    }
+    return jsonify(latest_data)
 
 @tourism_bp.route('/predict', methods=['POST'])
 def tourism_predict():
     try:
         data = request.get_json()
-        forecast_horizon = data.get('forecast_horizon', 12)
-        years = data.get('years', [data.get('Year', 2025)])
+
+        # Check if 'forecast_horizon' is provided, otherwise default to 12 months
+        forecast_horizon = data.get('forecast_horizon', 12)  # Default to 12 months
+
+        # Allow comparison across multiple years
+        years = sorted(data.get('years', [data.get('Year', 2025)]))  # Default to single-year prediction
         year_predictions = {}
 
-        plt.figure(figsize=(12, 6))
+        plt.figure(figsize=(12, 6))  # Create a figure for all years
+
+        rolling_values = []
+        lag1 = data.get('Lag1', None)  # Initialize lag1 from input or set to None
+        lag2 = data.get('Lag2', None)  # Initialize lag2 from input or set to None
+
         for year in years:
-            data["Year"] = year
+            data["Year"] = year  # Update input data with selected year
+            # Set Lag1 and Lag2 if they exist from the previous year
+            if lag1 is not None:
+                data["Lag1"] = lag1
+            if lag2 is not None:
+                data["Lag2"] = lag2
+
+                # Update Rolling_Mean_12 if we have enough previous data
+            if len(rolling_values) >= 12:
+                data["Rolling_Mean_12"] = sum(rolling_values[-12:]) / 12
             response_data, predictions, confidence_intervals = forecast_tourists(data, forecast_horizon)
 
+            lag1 = predictions[-1]  # Last month's prediction becomes Lag1 for the next year
+            lag2 = predictions[-2] if len(predictions) > 1 else lag1  # Second last month as Lag2
+
+            rolling_values.extend(predictions)
+
             months = [f"Month {i}" for i in range(1, forecast_horizon + 1)]
-            plt.plot(months, predictions, marker='o', label=f"Year {year}")
+            plt.plot(months, predictions, marker='o', linestyle='-', label=f"Year {year}")
             plt.fill_between(months, [ci[0] for ci in confidence_intervals], [ci[1] for ci in confidence_intervals],
                              alpha=0.2)
-            year_predictions[year] = response_data
 
-        plt.title(f'Predicted Tourists for {", ".join(map(str, years))}')
-        plt.xlabel('Month'), plt.ylabel('Tourists'), plt.legend(), plt.grid(True)
+            year_predictions[year] = response_data  # Store data for each year
+
+        # Graph customization
+        plt.title('Predicted Ayurveda Tourists for {", ".join(map(str, years))}')
+        plt.xlabel('Month')
+        plt.ylabel('Predicted Ayurveda Tourists')
+        plt.legend()
         plt.xticks(rotation=45)
+        plt.grid(True)
 
-        # Save plot and generate URL
-        static_dir = os.path.join(os.path.dirname(__file__), 'static')
-        image_path = os.path.join(static_dir, "forecast.png")
-        plt.savefig(image_path), plt.close()
+        # Save the plot as a static file
+        image_path = "static/forecast.png"
+        plt.savefig(image_path, format='png')
+        plt.close()  # Close figure to free memory
+
+        # Get the file URL
         image_url = url_for('static', filename='forecast.png', _external=True)
 
         return jsonify({
@@ -111,8 +150,10 @@ def tourism_predict():
             "yearly_predictions": year_predictions,
             "graph_url": image_url
         })
+
     except Exception as e:
         return jsonify({'error': str(e)}), 400
+
 
 if __name__ == '__main__':
     app.run(debug=True)
