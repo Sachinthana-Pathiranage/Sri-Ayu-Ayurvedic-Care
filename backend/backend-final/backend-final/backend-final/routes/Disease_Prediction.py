@@ -29,18 +29,21 @@ def predict():
         input_data = request.json
         print("Received user input:", input_data)  # Debugging line
 
-        # Fill missing symptom fields with default value 0
-        for feature in feature_names:
-            input_data.setdefault(feature, 0)
+        # Validate input data
+        if not all(feature in input_data for feature in feature_names):
+            return jsonify({"error": "Input data is missing one or more required features."}), 400
+
+            # Extract symptom values
+        symptom_values = [input_data[feature] for feature in feature_names]
+
+        # Check if all symptoms are zero (no symptoms selected)
+        if all(value == 0 for value in symptom_values):
+            return jsonify({
+                "error": "Please select at least one symptom to proceed."
+            }), 400
 
         input_df = pd.DataFrame([input_data], columns=feature_names)
 
-        # When all symptoms are zero
-        if all(value == 0 for value in input_data.values()):
-            return jsonify({
-                "prediction": "No Disease",
-                "probability": 1.0
-            }), 200
 
         input_scaled = scaler.transform(input_df)
         input_pca = pca_optimal.transform(input_scaled)
