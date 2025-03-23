@@ -42,15 +42,17 @@ def predict():
         if not all(feature in input_data for feature in feature_names):
             return jsonify({"error": "Input data is missing one or more required features."}), 400
 
+            # Extract symptom values
+        symptom_values = [input_data[feature] for feature in feature_names]
+
+        # Check if all symptoms are zero (no symptoms selected)
+        if all(value == 0 for value in symptom_values):
+            return jsonify({
+                "error": "Please select at least one symptom to proceed."
+            }), 400
+
         # Convert input data into a DataFrame
         input_df = pd.DataFrame([input_data], columns=feature_names)
-
-        # When all symptoms are zero
-        if all(value == 0 for value in input_data.values()):
-            return jsonify({
-                "prediction": "No Disease",
-                "probability": 1.0
-            }), 200
 
         # Scale the input features
         input_scaled = scaler.transform(input_df)
