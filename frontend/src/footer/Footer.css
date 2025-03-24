@@ -1,6 +1,6 @@
 .footer {
     display: flex;
-    width: 100%;
+    width: 100vw;
     flex-direction: column;
     /*background-color: #0b3f34;*/
     background-color: #0f7d6f;
@@ -16,27 +16,69 @@
 
 .box{
     width: 100vw;
-    margin-top: 30px;
     display: flex;
     flex-direction: column;
 
 }
 
-.box-one {
+.box-one {/*------------------------------------box-1--------------------------------------*/
+    margin-top: 50px;
     display: flex;
     justify-content: center;
     background-color: #0f7d6f;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+}
 
+
+.logo_slogan{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.footer-logo{
+    position: relative;
+    width: 200px;
+    left: 55px;
+    margin-bottom: 20px;
 
 }
-.box-two{
+
+.logo-footer p1{
+    font-size: 20pt;
+}
+
+.logo-footer p2{
+    font-size: 14pt;
+    margin-bottom: 50px;
+
+}
+
+
+.navbar-content{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    text-align: center;
+    gap: 10px;
+}
+
+
+.navbar-content a:hover
+{
+    color: black;
+    cursor: pointer;
+    text-align: center;
+}
+
+.box-two{/*------------------------------------box-2--------------------------------------*/
+    margin-top: 10px;
     display: flex;
     width: 100vw;
-    height: 300px;
-    flex-direction: row;
-    justify-content: space-evenly;
-
+    flex-direction: column;
+    text-align: left;
+    padding-left: 100px;
 }
 
 .address h1,
@@ -48,13 +90,9 @@
 .address p{
     text-align: left;
 }
-.navbar-content{
-    display: flex;
-    flex-direction: column;
-}
 
 
-.footer-links a {
+.footer-links ul {
     display: flex;
     list-style: none;
     flex-direction: column;
@@ -65,45 +103,15 @@
 
 }
 
-.footer-links a:hover,
-.navbar-content a:hover
-{
-    color: black;
-    cursor: pointer;
-    text-align: center;
-}
 
 hr { /*the line*/
     border: none;
     width: 100vw;
-
     border-top: 2px solid #ccc;
-    margin-top: 20px;
-    margin-bottom: 50px;
 
 
 
 }
-
-.logo-footer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    font-weight: 700;
-}
-
-.footer-logo{
-    width: 200px;
-}
-.logo-footer p1{
-    font-size: 14pt;
-}
-
-.logo-footer p2{
-    font-size: 14pt;
-}
-
 
 .contact p{
     text-align: left;
@@ -115,6 +123,7 @@ hr { /*the line*/
     flex-direction: row;
     gap: 10px;
 }
+
 .instagram,
 .facebook,
 .youtube,
@@ -124,5 +133,8 @@ hr { /*the line*/
 }
 
 .box-three{
-    margin-bottom: 30px;
+}
+
+.copyright{
+    font-weight: 500;
 }
