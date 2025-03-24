@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/outcome_frontend/static/css/main.f59ebd55.css",
+    "main.js": "/outcome_frontend/static/js/main.67d0db9a.js",
+    "static/media/ayurveda-logo.svg": "/outcome_frontend/static/media/ayurveda-logo.6cf8085599b884dd00dcf1d9c8f6abca.svg",
+    "index.html": "/outcome_frontend/index.html",
+    "main.f59ebd55.css.map": "/outcome_frontend/static/css/main.f59ebd55.css.map",
+    "main.67d0db9a.js.map": "/outcome_frontend/static/js/main.67d0db9a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f59ebd55.css",
+    "static/js/main.67d0db9a.js"
+  ]
+}

@@ -2,6 +2,7 @@ import os
 from flask_cors import CORS
 from routes.main import tourism_bp
 from routes.dosha_api import dosha_bp
+from routes.outcome import outcome_bp
 from routes.Disease_Prediction import disease_bp
 from flask import Flask, send_from_directory
 
@@ -12,6 +13,7 @@ CORS(app)
 app.register_blueprint(tourism_bp, url_prefix='/tourism')
 app.register_blueprint(dosha_bp, url_prefix='/dosha')
 app.register_blueprint(disease_bp, url_prefix='/disease')
+app.register_blueprint(outcome_bp, url_prefix='/outcome')
 
 @app.route("/dosha_frontend")
 def serve_dosha_index():
@@ -68,6 +70,29 @@ def serve_disease_index():
         "build"
     )
     return send_from_directory(disease_build_dir, "index.html")
+
+@app.route("/outcome_frontend")
+def serve_outcome_index():
+    outcome_build_dir = os.path.join(
+        os.path.dirname(__file__),
+        "..",
+        "frontend-final",
+        "outcome_page",
+        "build"
+    )
+    return send_from_directory(outcome_build_dir, "index.html")
+
+@app.route("/outcome_frontend/<path:path>")
+def serve_outcome_static(path):
+    outcome_build_dir = os.path.join(
+        os.path.dirname(__file__),
+        "..",
+        "frontend-final",
+        "outcome_page",
+        "build"
+    )
+    return send_from_directory(outcome_build_dir, path)
+
 
 @app.route("/recommendation_frontend/<path:path>")
 def serve_disease_static(path):
