@@ -7,6 +7,7 @@ import joblib
 import pandas as pd
 import os
 import numpy as np
+
 outcome_bp = Blueprint('outcome', __name__)
 
 app = Flask(__name__)
@@ -29,9 +30,10 @@ poly_features = joblib.load(os.path.join(MODEL_DIR, "poly_features.pkl"))
 tfidf_vectorizer = joblib.load(os.path.join(MODEL_DIR, "tfidf_vectorizer.pkl"))
 
 # Load dataset using relative path
-df = pd.read_excel(os.path.join(dataset_dir,"dropdown_dataset.xlsx"))
+df = pd.read_excel(os.path.join(dataset_dir, "dropdown_dataset.xlsx"))
 
-@app.route("/get_options", methods=["POST"])
+
+@app.route("outcome/get_options", methods=["POST"])
 def get_options():
     try:
         disease = request.json["disease"].strip().lower()  # Normalize input
@@ -66,6 +68,7 @@ def get_options():
         print("Error in get_options:", str(e))  # Log error
         return jsonify({"error": str(e)})
 
+
 @app.route("/predict/successs", methods=["POST"])
 def predict_successs():
     try:
@@ -76,7 +79,7 @@ def predict_successs():
         input_symptoms = data["symptoms"]
         input_treatment = data["treatment"]
         input_severity = data["severity"]
-        input_disease = data["disease"].strip().lower() # Normalize disease input
+        input_disease = data["disease"].strip().lower()  # Normalize disease input
 
         # TF-IDF symptoms
         symptoms_tfidf = tfidf_vectorizer.transform([input_symptoms]).toarray()
@@ -103,10 +106,10 @@ def predict_successs():
             treatment_encoded_df,
             severity_scaled_df
         ], axis=1)
-        print("Shape after combining features (before selection):", processed_features.shape) # Debugging shape
+        print("Shape after combining features (before selection):", processed_features.shape)  # Debugging shape
 
         # Feature selection and PCA
-        print("Shape before feature selection:", processed_features.shape) # Debugging shape
+        print("Shape before feature selection:", processed_features.shape)  # Debugging shape
         processed_features_selected = feature_selector.transform(processed_features)
         print("Shape after feature selection:", processed_features_selected.shape)  # Debugging shape
         processed_features_pca = pca_transformer.transform(processed_features_selected)
@@ -119,38 +122,42 @@ def predict_successs():
     except Exception as e:
         print("Error in success prediction:", str(e))  # Debug output
         return jsonify({"error": str(e)})
+
+
 @app.route("/predict/success", methods=["POST"])
 def predict_success():
     try:
         data = request.json
         print("Received data for success prediction:", data)
-        
+
         # Generate a realistic-looking success prediction
         input_value = round(random.uniform(2.0, 3.0), 8)  # Simulating processed input
         success_categories = ["Low", "Moderate", "High"]
         prediction = random.choice(success_categories)  # Simulating classification output
         print(f"Processed Input: [{input_value}]\nPredicted Success Category: [{prediction}]")
-        
+
         return jsonify({"success_category": prediction})
     except Exception as e:
         print("Error in success prediction:", str(e))
         return jsonify({"error": str(e)})
-    
+
+
 @app.route("/predict/recovery", methods=["POST"])
 def predict_recovery():
     try:
         data = request.json
         print("Received data for recovery prediction:", data)
-        
+
         # Generate a realistic-looking recovery time prediction
         input_value = round(random.uniform(2.0, 3.0), 8)  # Simulating processed input
         prediction = random.randint(3, 10)  # Simulating whole number day count
         print(f"Processed Input: [{input_value}]\nPredicted Recovery Time (XGBoost): [{prediction}] days")
-        
+
         return jsonify({"recovery_time": prediction})
     except Exception as e:
         print("Error in recovery prediction:", str(e))
         return jsonify({"error": str(e)})
+
 
 @app.route("/predict/recoveryy", methods=["POST"])
 def predict_recoveryy():
@@ -160,7 +167,7 @@ def predict_recoveryy():
         input_symptoms = data["symptoms"]
         input_treatment = data["treatment"]
         input_severity = data["severity"]
-        input_disease = data["disease"].strip().lower() # Normalize disease input
+        input_disease = data["disease"].strip().lower()  # Normalize disease input
 
         # TF-IDF symptoms
         symptoms_tfidf = tfidf_vectorizer.transform([input_symptoms]).toarray()
@@ -187,14 +194,14 @@ def predict_recoveryy():
             treatment_encoded_df,
             severity_scaled_df
         ], axis=1)
-        print("Shape after combining features (before scaling):", processed_features.shape) # Debugging shape
-        print("Shape before scaling:", processed_features.shape) # Debugging shape
+        print("Shape after combining features (before scaling):", processed_features.shape)  # Debugging shape
+        print("Shape before scaling:", processed_features.shape)  # Debugging shape
 
         # Scale numerical features
-        print("Shape before feature selection:", processed_features.shape) # Debugging shape
+        print("Shape before feature selection:", processed_features.shape)  # Debugging shape
 
         # Feature selection and PCA
-        print("Shape after combining features (before pca):", processed_features.shape) # Debugging shape
+        print("Shape after combining features (before pca):", processed_features.shape)  # Debugging shape
         processed_features_selected = feature_selector.transform(processed_features)
         print("Shape after feature selection:", processed_features_selected.shape)  # Debugging shape
         processed_features_pca = pca_transformer.transform(processed_features_selected)
@@ -207,6 +214,7 @@ def predict_recoveryy():
     except Exception as e:
         print("Error in recovery prediction:", str(e))  # Debug output
         return jsonify({"error": str(e)})
+
 
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=False)

@@ -2,18 +2,18 @@ import os
 from flask_cors import CORS
 from routes.main import tourism_bp
 from routes.dosha_api import dosha_bp
-from routes.outcome import outcome_bp
+#from routes.outcome import outcome_bp
 from routes.Disease_Prediction import disease_bp
 from flask import Flask, send_from_directory
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=None)
 CORS(app)
 
 # Register Blueprints with URL prefixes
 app.register_blueprint(tourism_bp, url_prefix='/tourism')
 app.register_blueprint(dosha_bp, url_prefix='/dosha')
 app.register_blueprint(disease_bp, url_prefix='/disease')
-app.register_blueprint(outcome_bp, url_prefix='/outcome')
+#app.register_blueprint(outcome_bp, url_prefix='/outcome')
 
 @app.route("/dosha_frontend")
 def serve_dosha_index():
@@ -105,25 +105,18 @@ def serve_disease_static(path):
     )
     return send_from_directory(disease_build_dir, path)
 
-@app.route('/')
-def home():
-    return """
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>Ayurvedic App Landing</title>
-      </head>
-      <body>
-        <h1>Welcome to the Ayurvedic App</h1>
-        <ul>
-          <li><a href="/dosha_frontend">Dosha Classification</a></li>
-          <li><a href="/recommendation_frontend">Treatment Recommendation</a></li>
-          <li><a href="/outcome_frontend">Outcome Prediction</a></li>
-          <li><a href="/tourism_frontend">Tourism Forecasting</a></li>
-        </ul>
-      </body>
-    </html>
-    """
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_landing(path):
+    # Hardcoded absolute path to your build folder
+    landing_build_dir = r"C:\Users\prabh\Documents\GitHub\Sri-Ayu-Ayurvedic-Care-new3\backend\backend-final\backend-final\frontend-final\landing_page\build"
+    abs_build_dir = os.path.abspath(landing_build_dir)
+    full_path = os.path.join(abs_build_dir, path)
+
+    if path and os.path.exists(full_path):
+        return send_from_directory(abs_build_dir, path)
+    return send_from_directory(abs_build_dir,"index.html")
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
