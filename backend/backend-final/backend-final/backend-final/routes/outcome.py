@@ -1,8 +1,16 @@
 import random
-from config import MODEL_DIR
-from config import dataset_dir
+import os
+from pathlib import Path
+
+# Get the base directory
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+# Set paths
+MODEL_DIR = BASE_DIR / "models"
+dataset_dir = BASE_DIR / "dataset"
 from flask import Flask, request, jsonify, Blueprint
 from flask_cors import CORS
+from flask_cors import cross_origin
 import joblib
 import pandas as pd
 import os
@@ -17,24 +25,32 @@ CORS(app)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Load trained models using relative paths
-model_dir = os.path.join(BASE_DIR, 'MODEL_DIR')
-knn_model = joblib.load(os.path.join(MODEL_DIR, "KNN_best_model.pkl"))
-xgb_model = joblib.load(os.path.join(MODEL_DIR, "XGBoost_best_model.pkl"))
+model_dir = os.path.join(BASE_DIR, 'models')
+knn_model = joblib.load(os.path.join(model_dir, "KNN_best_model.pkl"))
+xgb_model = joblib.load(os.path.join(model_dir, "XGBoost_best_model.pkl"))
 # Load preprocessing objects
-disease_encoder = joblib.load(os.path.join(MODEL_DIR, "disease_encoder.pkl"))
-treatment_encoder = joblib.load(os.path.join(MODEL_DIR, "treatment_encoder.pkl"))
-robust_scaler = joblib.load(os.path.join(MODEL_DIR, "robust_scaler.pkl"))
-feature_selector = joblib.load(os.path.join(MODEL_DIR, "feature_selector.pkl"))
-pca_transformer = joblib.load(os.path.join(MODEL_DIR, "pca_transformer.pkl"))
-poly_features = joblib.load(os.path.join(MODEL_DIR, "poly_features.pkl"))
-tfidf_vectorizer = joblib.load(os.path.join(MODEL_DIR, "tfidf_vectorizer.pkl"))
+disease_encoder = joblib.load(os.path.join(model_dir, "disease_encoder.pkl"))
+treatment_encoder = joblib.load(os.path.join(model_dir, "treatment_encoder.pkl"))
+robust_scaler = joblib.load(os.path.join(model_dir, "robust_scaler.pkl"))
+feature_selector = joblib.load(os.path.join(model_dir, "feature_selector.pkl"))
+pca_transformer = joblib.load(os.path.join(model_dir, "pca_transformer.pkl"))
+poly_features = joblib.load(os.path.join(model_dir, "poly_features.pkl"))
+tfidf_vectorizer = joblib.load(os.path.join(model_dir, "tfidf_vectorizer.pkl"))
 
+print(f'BASE_DIR: {BASE_DIR}')
 # Load dataset using relative path
+print(f'dataset_dir: {dataset_dir}')
+dataset_dir = os.path.join(BASE_DIR, 'dataset')
+print(f'Loading dataset from: {os.path.join(dataset_dir, "dropdown_dataset.xlsx")}')
 df = pd.read_excel(os.path.join(dataset_dir, "dropdown_dataset.xlsx"))
+print(f'Dataset loaded successfully. Shape: {df.shape}')
+print(f'Dataset columns: {df.columns.tolist()}')
 
 
-@app.route("outcome/get_options", methods=["POST"])
+@outcome_bp.route("/outcome/get_options", methods=["POST", "OPTIONS"])
 def get_options():
+    if request.method == "OPTIONS":
+        return jsonify({"message": "CORS preflight OK"}), 200
     try:
         disease = request.json["disease"].strip().lower()  # Normalize input
         print("Received disease for get_options:", disease)
@@ -69,62 +85,11 @@ def get_options():
         return jsonify({"error": str(e)})
 
 
-@app.route("/predict/successs", methods=["POST"])
-def predict_successs():
-    try:
-        data = request.json
-        print("Received data for success prediction:", data)
-        data = request.json
-        print("Received data for success prediction:", data)
-        input_symptoms = data["symptoms"]
-        input_treatment = data["treatment"]
-        input_severity = data["severity"]
-        input_disease = data["disease"].strip().lower()  # Normalize disease input
-
-        # TF-IDF symptoms
-        symptoms_tfidf = tfidf_vectorizer.transform([input_symptoms]).toarray()
-        symptoms_tfidf_df = pd.DataFrame(symptoms_tfidf, columns=tfidf_vectorizer.get_feature_names_out())
-
-        # Encode disease
-        disease_encoded = disease_encoder.transform([[input_disease]]).toarray()
-        disease_encoded_df = pd.DataFrame(disease_encoded, columns=disease_encoder.get_feature_names_out(['Disease']))
-
-        # Encode treatment
-        treatment_encoded = treatment_encoder.transform([input_treatment])
-        treatment_encoded_df = pd.DataFrame({'Treatment_Encoded': treatment_encoded})
-
-        # Encode severity using mapping from training script
-        severity_mapping = {"Mild": 0, "Moderate": 1, "Severe": 2}
-        severity_encoded = severity_mapping.get(input_severity, 1)  # Default to Moderate if not found
-        severity_scaled = robust_scaler.transform([[float(severity_encoded)]])
-        severity_scaled_df = pd.DataFrame(severity_scaled, columns=['Severity'])
-
-        # Combine processed features
-        processed_features = pd.concat([
-            symptoms_tfidf_df,
-            disease_encoded_df,
-            treatment_encoded_df,
-            severity_scaled_df
-        ], axis=1)
-        print("Shape after combining features (before selection):", processed_features.shape)  # Debugging shape
-
-        # Feature selection and PCA
-        print("Shape before feature selection:", processed_features.shape)  # Debugging shape
-        processed_features_selected = feature_selector.transform(processed_features)
-        print("Shape after feature selection:", processed_features_selected.shape)  # Debugging shape
-        processed_features_pca = pca_transformer.transform(processed_features_selected)
-        print("Shape after PCA:", processed_features_pca.shape)  # Debugging shape
-
-        prediction = knn_model.predict(processed_features_pca)
-        print("Success Prediction Output:", prediction)  # Debug output
-
-        return jsonify({"success_category": prediction[0]})
-    except Exception as e:
-        print("Error in success prediction:", str(e))  # Debug output
-        return jsonify({"error": str(e)})
+print(app.url_map)
 
 
-@app.route("/predict/success", methods=["POST"])
+@outcome_bp.route("/predict/success", methods=["POST"])
+@cross_origin()
 def predict_success():
     try:
         data = request.json
@@ -142,7 +107,8 @@ def predict_success():
         return jsonify({"error": str(e)})
 
 
-@app.route("/predict/recovery", methods=["POST"])
+@outcome_bp.route("/predict/recovery", methods=["POST"])
+@cross_origin()
 def predict_recovery():
     try:
         data = request.json
@@ -156,63 +122,6 @@ def predict_recovery():
         return jsonify({"recovery_time": prediction})
     except Exception as e:
         print("Error in recovery prediction:", str(e))
-        return jsonify({"error": str(e)})
-
-
-@app.route("/predict/recoveryy", methods=["POST"])
-def predict_recoveryy():
-    try:
-        data = request.json
-        print("Received data for recovery prediction:", data)
-        input_symptoms = data["symptoms"]
-        input_treatment = data["treatment"]
-        input_severity = data["severity"]
-        input_disease = data["disease"].strip().lower()  # Normalize disease input
-
-        # TF-IDF symptoms
-        symptoms_tfidf = tfidf_vectorizer.transform([input_symptoms]).toarray()
-        symptoms_tfidf_df = pd.DataFrame(symptoms_tfidf, columns=tfidf_vectorizer.get_feature_names_out())
-
-        # Encode disease
-        disease_encoded = disease_encoder.transform([[input_disease]]).toarray()
-        disease_encoded_df = pd.DataFrame(disease_encoded, columns=disease_encoder.get_feature_names_out(['Disease']))
-
-        # Encode treatment
-        treatment_encoded = treatment_encoder.transform([input_treatment])
-        treatment_encoded_df = pd.DataFrame({'Treatment_Encoded': treatment_encoded})
-
-        # Encode severity using mapping from training script
-        severity_mapping = {"Mild": 0, "Moderate": 1, "Severe": 2}
-        severity_encoded = severity_mapping.get(input_severity, 1)  # Default to Moderate if not found
-        severity_scaled = robust_scaler.transform([[float(severity_encoded)]])
-        severity_scaled_df = pd.DataFrame(severity_scaled, columns=['Severity'])
-
-        # Combine processed features
-        processed_features = pd.concat([
-            symptoms_tfidf_df,
-            disease_encoded_df,
-            treatment_encoded_df,
-            severity_scaled_df
-        ], axis=1)
-        print("Shape after combining features (before scaling):", processed_features.shape)  # Debugging shape
-        print("Shape before scaling:", processed_features.shape)  # Debugging shape
-
-        # Scale numerical features
-        print("Shape before feature selection:", processed_features.shape)  # Debugging shape
-
-        # Feature selection and PCA
-        print("Shape after combining features (before pca):", processed_features.shape)  # Debugging shape
-        processed_features_selected = feature_selector.transform(processed_features)
-        print("Shape after feature selection:", processed_features_selected.shape)  # Debugging shape
-        processed_features_pca = pca_transformer.transform(processed_features_selected)
-        print("Shape after PCA:", processed_features_pca.shape)  # Debugging shape
-
-        prediction = xgb_model.predict(processed_features_pca)
-        print("Recovery Prediction Output:", prediction)  # Debug output
-
-        return jsonify({"recovery_time": float(prediction[0])})
-    except Exception as e:
-        print("Error in recovery prediction:", str(e))  # Debug output
         return jsonify({"error": str(e)})
 
 
