@@ -48,7 +48,7 @@ function App() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const apiUrl = 'http://localhost:8000/predict';
+        const apiUrl = 'http://localhost:8000/dosha/predict';
 
 
         try {
@@ -227,7 +227,7 @@ function App() {
 
                             {/*3_shoulder_Breadth*/}
                             <div>
-                                <label htmlFor="shoulder_Breadth">Soulder Breadth</label>
+                                <label htmlFor="shoulder_Breadth">Shoulder Breadth</label>
                                 <select
                                     id="3"
                                     name="shoulder_Breadth"
