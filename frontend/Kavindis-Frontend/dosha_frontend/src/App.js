@@ -11,12 +11,12 @@ import tree_small from './assets/tree_small.png';
 import tree_bottom from './assets/tree_bottom.png';
 /*import woman from './assets/woman.png';*/
 /*import woman_2 from './assets/woman_2.png'*/
+import NavBar from "./NavBar";
 
 
 
 
 function App() {
-
 
     const [formData, setFormData] = useState({
         bodyFrame_Breadth: '',
@@ -48,7 +48,7 @@ function App() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const apiUrl = 'http://localhost:8000/dosha/predict';
+        const apiUrl = 'http://127.0.0.1:5000/dosha/predict';
 
 
         try {
@@ -107,7 +107,10 @@ function App() {
 
     return (
         <div className="App">
+
             <div className="split-container">
+                <NavBar />
+
                 <div className="bg_top">
                     <img
                         src={bg_one}

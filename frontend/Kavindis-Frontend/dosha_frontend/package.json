@@ -1,6 +1,7 @@
 {
   "name": "dummy_frontend_new",
   "version": "0.1.0",
+  "homepage": "/dosha_frontend",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",

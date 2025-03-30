@@ -3,6 +3,7 @@
 
 body {
     margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
     background-color: #B8E0DA;
     /*overscroll-behavior: none;*/
@@ -11,7 +12,6 @@ body {
 }
 
 .App {
-    padding: 20px;
     text-align: center;
     background-color: #B8E0DA;
     overflow-x: hidden;
@@ -31,7 +31,7 @@ body {
 .bg_one{
     position: absolute;
     max-width: 50%;
-    top: -255px;
+    top: -200px;
     left: -260px;
     transform: rotate(-40deg);
 }
@@ -39,7 +39,7 @@ body {
     z-index: 1;
     position: absolute;
     max-width: 60%;
-    top:-450px;
+    top:-350px;
     right: 90px;
     transform: rotate(235deg);
 }
@@ -83,12 +83,11 @@ body {
 .split-container {
     display: flex;
     flex-direction: column;
-    gap: 80px;
+    gap: 30px;
     margin: auto;
     justify-content: center;
     align-items: center;
     overscroll-behavior: none;
-    overflow: hidden;
 
 }
 
@@ -442,6 +441,7 @@ body {
     border-radius: 8px;
     text-align: center;
     max-width: 300px;
+    height: 300px;
     margin: 100px auto 100px;
     align-items: center;
     justify-content: center;
