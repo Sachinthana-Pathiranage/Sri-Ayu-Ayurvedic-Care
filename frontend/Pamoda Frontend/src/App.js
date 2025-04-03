@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 import search from './assets/search.png'; // Relative path
 import arrow_right from './assets/arrow_right.png'; // Relative path
 import bg_one from './assets/img_one.png'; // Relative path
@@ -163,11 +164,17 @@ function App() {
     }
   };
 
-  useEffect(() => {
+ useEffect(() => {
     if (predictionMade && resultRef.current) {
-      resultRef.current.scrollIntoView({ behavior: 'smooth' });
+        const resultPosition = resultRef.current.offsetTop;
+        const scrollPosition = resultPosition - 200; // Adjust this value as needed
+
+        window.scrollTo({
+            top: scrollPosition,
+            behavior: 'smooth'
+        });
     }
-  }, [predictionMade]);
+}, [predictionMade]);
 
   useEffect(() => {
     if (showWellnessForm && wellnessFormRef.current) {
@@ -178,6 +185,18 @@ function App() {
   const triggerAnimation = () => {
     setAnimationKey(prev => prev + 1);
   };
+
+  useEffect(() => {
+  if (wellnessData && wellnessBoxesRef.current) {
+    const boxesPosition = wellnessBoxesRef.current.offsetTop;
+    const scrollPosition = boxesPosition - 80; // Reduced from 120px to 80px
+
+    window.scrollTo({
+      top: scrollPosition,
+      behavior: 'smooth'
+    });
+  }
+}, [wellnessData]);
 
   const handleScroll = () => {
     triggerAnimation();
@@ -190,7 +209,7 @@ function App() {
     <div className="App">
       {/* Add the Navbar component here */}
       <NavBar />
-
+      <div className="main-content">
       <div className="split-container">
         <div className="bg_top">
           <img src={bg_one} alt="bg_one_img" className="bg_one" />
@@ -272,12 +291,7 @@ function App() {
           <button
             type="button"
             className="wellness-btn"
-            onClick={() => {
-              setShowWellnessForm(true);
-              if (wellnessFormRef.current) {
-                wellnessFormRef.current.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
+            onClick={() => setShowWellnessForm(true)}
           >
             Wellness Plan
           </button>
@@ -382,6 +396,9 @@ function App() {
           )}
         </div>
       )}
+      </div>
+      {/* Add the Footer component here */}
+      <Footer />
     </div>
   );
 }
