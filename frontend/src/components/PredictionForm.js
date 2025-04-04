@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 
 const PredictionForm = ({ onPredict }) => {
   const [formData, setFormData] = useState({
     forecast_horizon: 5,
     Year: 2025,
-    Lag2: 900,
-    Rolling_Mean_12: 1000,
+    Lag1:0,
+    Lag2: 0,
+    Rolling_Mean_12: 0,
     Month: 1
   });
+
+  useEffect(() => {
+    // Fetch the latest data from the backend when the component mounts
+    fetch("http://127.0.0.1:5000/latest-data")
+      .then((response) => response.json())
+      .then((data) => {
+        setFormData((prevData) => ({
+          ...prevData,
+          Lag1: data.Lag1,
+          Lag2: data.Lag2,
+          Rolling_Mean_12: data.Rolling_Mean_12
+        }));
+      })
+      .catch((error) => console.error("Error fetching latest data:", error));
+  }, []); // Empty array means this runs only once when the component mounts
 
   const handleChange = (e) => {
     let { name, value } = e.target;
@@ -34,8 +50,6 @@ const PredictionForm = ({ onPredict }) => {
         <div className="label-year"><b><label className="text-sm font-medium text-gray-700 mb-1">Year</label></b></div>
         <select name="Year" value={formData.Year} onChange={handleChange} className="custom-dropdown">
           <option value="2025">2025</option>
-          <option value="2026">2026</option>
-          <option value="2027">2027</option>
         </select>
       </div>
       {/* Forecast Horizon Input */}

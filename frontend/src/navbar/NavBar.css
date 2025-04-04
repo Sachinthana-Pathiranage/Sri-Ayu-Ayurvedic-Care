@@ -6,6 +6,7 @@
     width: 100%;
     height: 130px;
     margin: 0;
+    padding: 0;
     justify-content: space-between;
     z-index: 2;
 }
@@ -60,4 +61,3 @@
     background-color: #58C0B6;
     cursor: pointer;
 }
-

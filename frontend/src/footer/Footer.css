@@ -10,8 +10,6 @@
     color: white;
     margin: 0;
     padding: 0;
-
-
 }
 
 .box{
@@ -22,46 +20,56 @@
 }
 
 .box-one {/*------------------------------------box-1--------------------------------------*/
-    margin-top: 50px;
+    margin-top: 70px;
     display: flex;
+    text-align: center;
     justify-content: center;
+    align-content: center;
+
     background-color: #0f7d6f;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 
 .logo_slogan{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .footer-logo{
     position: relative;
     width: 200px;
-    left: 55px;
+    left: 230px;
     margin-bottom: 20px;
 
 }
 
 .logo-footer p1{
-    font-size: 20pt;
+    font-size: 15pt;
 }
 
 .logo-footer p2{
     font-size: 14pt;
     margin-bottom: 50px;
-
+    margin-top: 20px;
 }
 
 
 .navbar-content{
+    position: relative;
+
     display: flex;
     flex-direction: row;
-    align-content: center;
-    text-align: center;
     gap: 10px;
+    left: 230px;
+}
+
+.navbar-content a
+{
+    color: white;
+    font-weight: normal;
+    text-decoration: none;
 }
 
 
@@ -69,16 +77,17 @@
 {
     color: black;
     cursor: pointer;
-    text-align: center;
 }
 
 .box-two{/*------------------------------------box-2--------------------------------------*/
-    margin-top: 10px;
+    margin-top: 35px;
     display: flex;
     width: 100vw;
     flex-direction: column;
     text-align: left;
     padding-left: 100px;
+
+    margin-bottom: 50px;
 }
 
 .address h1,
@@ -133,6 +142,8 @@ hr { /*the line*/
 }
 
 .box-three{
+    margin-top: 50px;
+    margin-bottom: 80px;
 }
 
 .copyright{

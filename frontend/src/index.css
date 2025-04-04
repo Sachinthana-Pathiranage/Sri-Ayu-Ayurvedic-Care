@@ -494,20 +494,14 @@ body {
     transform: rotate(-102deg);
 }
 
-.tree_bottom{
-    position: absolute;
-    max-width: 38%;
-    top: 583px;
-    left: -40px;
-    z-index: 0;
-}
 
 .float-container h1{
     margin-top: 40px;
     font-size: 25pt;
     justify-content: center;
-    margin-left: 33%;
+    margin-left: 40%;
     color: white;
+
 }
 
 .form-content label{
@@ -542,3 +536,6 @@ body {
     transform: none;
 
 }
+
+
+

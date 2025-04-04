@@ -7,6 +7,7 @@ export const fetchPredictions = async (formData) => {
     console.log("Sending request with:", formData);
     const response = await axios.post(`${API_URL}/predict`, formData, {
       headers: {
+        "method": "POST",
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },

@@ -70,6 +70,16 @@ def forecast_tourists(initial_data, forecast_horizon):
 
     return response_data, predictions, confidence_intervals
 
+@app.route('/latest-data', methods=['GET'])
+def get_latest_data():
+    # Fetch the latest data from your source (e.g., database or static data)
+    latest_data = {
+        'Lag1': 850,  # Example value, replace with actual data fetching logic
+        'Lag2': 900,  # Example value, replace with actual data fetching logic
+        'Rolling_Mean_12': 1000  # Example value, replace with actual data fetching logic
+    }
+    return jsonify(latest_data)
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -80,14 +90,32 @@ def predict():
         forecast_horizon = data.get('forecast_horizon', 12)  # Default to 12 months
 
         # Allow comparison across multiple years
-        years = data.get('years', [data.get('Year', 2025)])  # Default to single-year prediction
+        years = sorted(data.get('years', [data.get('Year', 2025)]))  # Default to single-year prediction
         year_predictions = {}
 
-        plt.figure(figsize=(12, 6))  # Create a figure for all years
+         # Create a figure for all years
+
+        rolling_values = []
+        lag1 = data.get('Lag1', None)  # Initialize lag1 from input or set to None
+        lag2 = data.get('Lag2', None)  # Initialize lag2 from input or set to None
 
         for year in years:
             data["Year"] = year  # Update input data with selected year
+            # Set Lag1 and Lag2 if they exist from the previous year
+            if lag1 is not None:
+                data["Lag1"] = lag1
+            if lag2 is not None:
+                data["Lag2"] = lag2
+
+                # Update Rolling_Mean_12 if we have enough previous data
+            if len(rolling_values) >= 12:
+                data["Rolling_Mean_12"] = sum(rolling_values[-12:]) / 12
             response_data, predictions, confidence_intervals = forecast_tourists(data, forecast_horizon)
+
+            lag1 = predictions[-1]  # Last month's prediction becomes Lag1 for the next year
+            lag2 = predictions[-2] if len(predictions) > 1 else lag1  # Second last month as Lag2
+
+            rolling_values.extend(predictions)
 
             months = [f"Month {i}" for i in range(1, forecast_horizon + 1)]
             plt.plot(months, predictions, marker='o', linestyle='-', label=f"Year {year}")
@@ -97,12 +125,13 @@ def predict():
             year_predictions[year] = response_data  # Store data for each year
 
         # Graph customization
-        plt.title(f'Predicted Ayurveda Tourists for {", ".join(map(str, years))}')
+        plt.title('Predicted Ayurveda Tourists for {", ".join(map(str, years))}')
         plt.xlabel('Month')
         plt.ylabel('Predicted Ayurveda Tourists')
         plt.legend()
         plt.xticks(rotation=45)
         plt.grid(True)
+        plt.figure(figsize=(12, 6))
 
         # Save the plot as a static file
         image_path = "static/forecast.png"

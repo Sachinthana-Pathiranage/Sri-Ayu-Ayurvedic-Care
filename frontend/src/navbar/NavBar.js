@@ -1,9 +1,7 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import './NavBar.css';
-import logo from './assets/navbar_img/logo.png';
-import logo_2 from './assets/navbar_img/logo_2.png';
-import logo_3 from './assets/navbar_img/logo_3.png';
+import logo_3 from './navbar_img/logo_3.png';
+import { Link } from 'react-router-dom';
 
 function NavBar() {
     return (
@@ -12,31 +10,21 @@ function NavBar() {
                 <img src={logo_3} alt="Logo" className="logo"/>
             </div>
             <ul className="navbar-links">
-{/*                <li>
-                    <Link to="/">Home</Link>
+                <li>
+                    <a href='/#content'>Home</a>
                 </li>
                 <li>
-                    <Link to="/about">About</Link>
+                    <a href='/#about-desc'>About Us</a>
                 </li>
                 <li>
-                    <Link to="/services">Services</Link>
+                    <a href='/#services'>Services</a>
                 </li>
                 <li>
-                    <Link to="/contact">Contact</Link>
-                </li>*/}
-                <li>
-                    <a>Home</a>
-                </li>
-                <li>
-                    <a>About</a>
-                </li>
-                <li>
-                    <a>Services</a>
-                </li>
-                <li>
-                    <a>Contact</a>
+                    <a href="/#contact">Contact</a>
                 </li>
 
+                <li>
+                <a href="http://localhost:3008/login">
                 <div className="navbar-button">
                 <button
                     type="button"
@@ -45,8 +33,8 @@ function NavBar() {
                     Sign-up / Log-in
                 </button>
                 </div>
-
-
+                </a>
+                </li>
             </ul>
         </nav>
 

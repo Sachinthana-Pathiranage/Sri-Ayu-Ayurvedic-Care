@@ -1,14 +1,11 @@
 import React from 'react';
 import './Footer.css';
-import logo_3 from './assets/footer_img/logo_3.png'
-import instagram from './assets/footer_img/instagram.png'
-import facebook from './assets/footer_img/facebook.png'
-import youtube from './assets/footer_img/youtube.png'
-import twitter from './assets/footer_img/twitter.png'
-
-
-
-
+import logo_3 from './footer_img/logo_3.png'
+import instagram from './footer_img/instagram.png'
+import facebook from './footer_img/facebook.png'
+import youtube from './footer_img/youtube.png'
+import twitter from './footer_img/twitter.png'
+import tree_bottom from "../assets/tree_bottom.png";
 
 function Footer() {
     return (
@@ -22,13 +19,13 @@ function Footer() {
                         alt="logo"
                         className="footer-logo"
                     />
-                    <p1>Slogan Here</p1>
+                    <p1>" Experience authentic Ayurvedic balance - Ignite natural wellness power "</p1>
                     <p2>Sri-Ayu Ayurvedic Care Application</p2>
                     </div>
                     <div className="navbar-content">
-                        <ul>Home</ul>
-                        <ul>About Us</ul>
-                        <ul>Services</ul>
+                        <a href='#content'>Home</a>
+                        <a href='#about-desc'>About Us</a>
+                        <a href='#services'>Services</a>
                     </div>
                 </div>
             </div>

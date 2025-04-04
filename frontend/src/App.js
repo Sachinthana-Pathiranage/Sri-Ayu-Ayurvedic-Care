@@ -3,8 +3,8 @@ import PredictionForm from './components/PredictionForm';
 import PredictionChart from './components/PredictionChart';
 import { fetchPredictions } from './components/api';
 import GrowthTable from './components/GrowthTable';
-//mport Navbar from './navbar/NavBar.js'; // Adjust the path based on your folder structure
-//import Footer from './footer/Footer.js';
+import Navbar from './navbar/NavBar.js'; // Adjust the path based on your folder structure
+import Footer from './footer/Footer.js';
 import loadingImage from "./assets/bggg.png";
 import search from './assets/search.png';
 import bg_one from './assets/img_one.png';
@@ -13,11 +13,11 @@ import bg_three from './assets/img_three.png';
 import bg_four from './assets/img_four.png';
 import tree_big from './assets/tree_big.png';
 import tree_small from './assets/tree_small.png';
-import tree_bottom from './assets/tree_bottom.png';
 import arrow_right from './assets/arrow_right.png';
 
 
 function App() {
+    const [formData, setFormData] = useState({ year: "", horizon: "" });
   const [predictionData, setPredictionData] = useState(null);
   const predictionSectionRef = useRef(null);
 
@@ -74,114 +74,120 @@ function App() {
   };
 
 
-  return (<div>
+  return (<>
+          <div className="navbar"><Navbar/></div>
 
-          <div className="bg_top">
-              <img
-                  src={bg_one}
-                  alt="bg_one_img"
-                  className="bg_one"
-              />
-              <img
-                  src={bg_two}
-                  alt="bg_two_img"
-                  className="bg_two"
-              />
-          </div>
+          <div className="entire-content">
 
-          <div className="description-container">
-              <h2>Ayurvedic Tourism Forecasting</h2>
-              <form>
-                  <div className="form-group">
-                      <label htmlFor="description"></label>
-                      <p>Predict the Future of Ayurvedic Tourism – Start Your Journey Today!</p>
-                      <img
-                          src={search}
-                          alt="Illustrasion of woman"
-                          className="search"
-                      />
-                  </div>
-                  <div className="button-and-icon">
-                      <button className="desc-btn" onClick={handleScrollToPrediction}>Get Started</button>
-                      <div className="arrow_btn">
+
+              <div className="bg_top">
+                  <img
+                      src={bg_one}
+                      alt="bg_one_img"
+                      className="bg_one"
+                  />
+                  <img
+                      src={bg_two}
+                      alt="bg_two_img"
+                      className="bg_two"
+                  />
+              </div>
+
+              <div className="description-container">
+                  <h2>Ayurvedic Tourism Forecasting</h2>
+                  <form>
+                      <div className="form-group">
+                          <label htmlFor="description"></label>
+                          <p>Predict the Future of Ayurvedic Tourism – Start Your Journey Today!</p>
                           <img
-                              src={arrow_right}
-                              alt="Arrow"
-                              className="arrow_right"
-                              onClick={handleScrollToPrediction}
+                              src={search}
+                              alt="Illustrasion of woman"
+                              className="search"
                           />
                       </div>
-                  </div>
-              </form>
-          </div>
-          <div className="bg_bottom">
-              <img
-                  src={bg_three}
-                  alt="bg_three_img"
-                  className="bg_three"
-              />
+                      <div className="button-and-icon">
+                          <button className="desc-btn" onClick={handleScrollToPrediction}>Get Started</button>
+                          <div className="arrow_btn">
+                              <img
+                                  src={arrow_right}
+                                  alt="Arrow"
+                                  className="arrow_right"
+                                  onClick={handleScrollToPrediction}
+                              />
+                          </div>
+                      </div>
+                  </form>
+              </div>
+              <div className="bg_bottom">
+                  <img
+                      src={bg_three}
+                      alt="bg_three_img"
+                      className="bg_three"
+                  />
 
-              <img
-                  src={bg_four}
-                  alt="bg_four_img"
-                  className="bg_four"
-              />
-          </div>
-          <div className="tree_container">
-              <img src={tree_big} alt="img_tree" className="tree_big"/>
-              <img src={tree_small} alt="img_tree_2" className="tree_small"/>
-              <img src={tree_bottom} alt="img_tree_3" className="tree_bottom"/>
-          </div>
+                  <img
+                      src={bg_four}
+                      alt="bg_four_img"
+                      className="bg_four"
+                  />
+              </div>
+              <div className="tree_container">
+                  <img src={tree_big} alt="img_tree" className="tree_big"/>
+                  <img src={tree_small} alt="img_tree_2" className="tree_small"/>
+
+              </div>
 
 
-          <div ref={predictionSectionRef} className="float-container">
-              <h1>Let's Forecast Ayurvedic Tourists !</h1>
-              <div className="float-child">
-                  <PredictionForm onPredict={handlePrediction}/>
+              <div ref={predictionSectionRef} className="float-container">
+                  <h1>Let's Forecast Ayurvedic Tourists !</h1>
+                  <div className="float-child">
+                      <PredictionForm onPredict={handlePrediction}/>
 
-                  <div className="summary-container">
-                      <div className="summary-content fade-in">
-                          <h2>Summary</h2>
-                          {predictionData ? (
-                              <>
-                                  <p><strong>Total Predicted Tourists:</strong> {predictionData.total_tourists || 0}</p>
-                                  <p><strong>Average Monthly
-                                      Tourists:</strong> {predictionData.avg_tourists ? predictionData.avg_tourists.toFixed(2) : '0.00'}
-                                      <p><strong>Peak Month:</strong> {predictionData.peak_month}</p>
-                                      <p><strong>Lowest Month:</strong> {predictionData.low_month}</p>
-                                  </p>
-                              </>
+                      <div className="summary-container">
+                          <div className="summary-content fade-in">
+                              <h2>Summary</h2>
+                              {predictionData ? (
+                                  <>
+                                      <p><strong>Total Predicted Tourists:</strong> {predictionData.total_tourists || 0}
+                                      </p>
+                                      <p><strong>Average Monthly
+                                          Tourists:</strong> {predictionData.avg_tourists ? predictionData.avg_tourists.toFixed(2) : '0.00'}
+                                          <p><strong>Peak Month:</strong> {predictionData.peak_month}</p>
+                                          <p><strong>Lowest Month:</strong> {predictionData.low_month}</p>
+                                      </p>
+                                  </>
 
-                          ) : (
-                              <p className="text-muted">To see the summary, choose a year and forecast horizon.</p>
-                          )}
+                              ) : (
+                                  <p className="text-muted">To see the summary, choose a year and forecast horizon.</p>
+                              )}
+                          </div>
                       </div>
                   </div>
               </div>
+
+
+              {/* Right Side - Forecast Chart */}
+
+              <div className={`chart-container ${predictionData ? "no-bg" : ""}`}>
+                  {predictionData ? (
+                      <PredictionChart data={predictionData}/>
+                  ) : (
+                      <div className="loading-image">
+                          <img src={loadingImage} alt="Loading..."/>
+                      </div>
+                  )}
+              </div>
+
+              <div className="growth-table-container">
+                  {/* Growth Table */}
+                  {predictionData && predictionData.monthly_growth_percentage && (
+                      <GrowthTable data={predictionData.monthly_growth_percentage}/>
+                  )}
+              </div>
+
+              <Footer/>
           </div>
-
-
-          {/* Right Side - Forecast Chart */}
-
-          <div className={`chart-container ${predictionData ? "no-bg" : ""}`}>
-              {predictionData ? (
-                  <PredictionChart data={predictionData}/>
-              ) : (
-                  <div className="loading-image">
-                      <img src={loadingImage} alt="Loading..."/>
-                  </div>
-              )}
-          </div>
-
-          <div className="growth-table-container">
-              {/* Growth Table */}
-              {predictionData && predictionData.monthly_growth_percentage && (
-                  <GrowthTable data={predictionData.monthly_growth_percentage}/>
-              )}
-          </div>
-
-
-      </div>
+      </>
 
 
   )
