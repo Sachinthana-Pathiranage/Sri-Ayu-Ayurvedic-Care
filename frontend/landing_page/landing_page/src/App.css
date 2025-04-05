@@ -1,0 +1,33 @@
+/* Ensure html and body fill the viewport */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Set up the App container as a flex column */
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Let the Content component take up available space */
+.content {
+  flex: 1;
+}
+
+/* Optional styling for NavBar and Footer */
+.navbar {
+  /* Your navbar styling here */
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}

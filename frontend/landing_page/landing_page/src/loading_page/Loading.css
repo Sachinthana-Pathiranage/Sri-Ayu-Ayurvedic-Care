@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+.Big{
+    margin: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-color: #0f7d6f;
+
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+
+    align-content: center;
+    justify-content: center;
+
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+
+    overflow: hidden;
+    z-index: 9999;
+}
+
+/* Description box */
+.description-container {
+    margin: 0;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    width: 420px;
+    max-height: 520px;/* Or adjust as desired */
+
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+
+
+}
+
+.description-container h2{
+    font-size: 13pt;
+    font-weight: 300;
+    color: white;
+}
+
+.description-container p{
+    margin-top: 30px;
+    font-size: 18pt;
+    font-weight: 350;
+    color: white;
+
+    margin-bottom: 0;
+}
+
+.logo{
+    width: 180px;
+    height: auto;
+}
+
+.tree_big{
+    position: absolute;
+    max-width: 12%;
+    top: 220px;
+    right: 10px;
+    transform: rotate(-143deg);
+
+}
+
+.tree_small{
+    position: absolute;
+    max-width: 10%;
+    right: 60px;
+    top: 150px;
+    margin-right: -10px;
+    transform: rotate(-102deg);
+}
+
+.tree_bottom{
+    position: absolute;
+    max-width: 38%;
+    top: 583px;
+    left: -40px;
+    z-index: 0;
+}
+
+.flower{
+    position: absolute;
+    bottom: -120px;
+    left: -50px;
+    z-index: 3;
+}
+
+.cat{
+    position: absolute;
+    bottom: -20px;
+    left: -60px;
+    z-index: 4;
+}
+
+.girl{
+    position: absolute;
+    bottom: -30px;
+    right: -20px;
+    z-index: 4;
+}
+
+.leaf{
+    position: absolute;
+    bottom: 250px;
+    right: -380px;
+    rotate: -30deg;
+    z-index: 4;
+}
+.big_leaf{
+    position: absolute;
+    top: -80px;
+    left: 45px;
+    rotate: 125deg;
+    z-index: 4;
+}
+
+.small_leaf{
+    position: absolute;
+    top: 30px;
+    left: -30px;
+    rotate: 150deg;
+    z-index: 4;
+}
+
+.flower_img{
+    width: 230px;
+}
+
+.cat_img{
+    width: 230px;
+}
+.girl_img{
+    width: 500px;
+}
+
+.leaf_img{
+    width: 650px;
+}
+
+.big_leaf_img{
+    width: 200px;
+}
+.small_leaf_img{
+    width: 200px;
+}
+
+.loading_bar{
+    width: 250px;
+}
+
+.gif{
+    width: 250px;
+}
+
+.bar{
+    margin-top: 10px;
+}
