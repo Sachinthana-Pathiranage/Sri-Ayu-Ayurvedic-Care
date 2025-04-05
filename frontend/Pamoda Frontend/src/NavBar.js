@@ -34,7 +34,7 @@ function NavBar() {
                     <a>Contact</a>
                 </li>
 
-                <div className="navbar-button">
+  <div className="navbar-button">
                 <button
                     type="button"
                     className="sign-up"
