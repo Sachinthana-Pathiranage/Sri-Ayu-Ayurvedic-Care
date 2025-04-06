@@ -13,7 +13,7 @@ Sri Ayu is an AI-driven Ayurvedic wellness system designed to predict doshas, di
 - 🏥 Disease Prediction from Symptoms (Gastritis, Migraine, Diabetes, Common_cold)
 - 🧑‍⚕️ Treatment Recommendation (Based on Dosha, Age, and Disease)
 - 📈 Treatment Success Outcome Prediction
-- 🌍 Ayurvedic Tourism Trend Forecasting (Up to 2025)
+- 🌍 Ayurvedic Tourism Trend Forecasting (for 2025)
 ## System Architecture
 The system uses a Flask backend, React frontend, and integrates with SQLite database. Machine learning models such as Random Forest, KNN, XGBoost are used for core predictions and forecasting.
 ![image](https://github.com/user-attachments/assets/691f1331-3866-40de-8d2c-8607f6ed3a9e)
