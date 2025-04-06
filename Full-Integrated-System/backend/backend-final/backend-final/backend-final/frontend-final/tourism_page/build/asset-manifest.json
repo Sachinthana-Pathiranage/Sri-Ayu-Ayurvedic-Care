@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/tourism_frontend/static/css/main.9a3ce04f.css",
+    "main.js": "/tourism_frontend/static/js/main.b4fdfe3d.js",
+    "static/media/img_three.png": "/tourism_frontend/static/media/img_three.58571375b56fe036d7ad.png",
+    "static/media/img_two.png": "/tourism_frontend/static/media/img_two.24740f732f15aa5de6f3.png",
+    "static/media/tree_bottom.png": "/tourism_frontend/static/media/tree_bottom.1aa7dcaf8bb2e24b68ad.png",
+    "static/media/bggg.png": "/tourism_frontend/static/media/bggg.42435a3ac231b5fe041f.png",
+    "static/media/logo.png": "/tourism_frontend/static/media/logo.d80c62a0d74a8e3abb63.png",
+    "static/media/img_one.png": "/tourism_frontend/static/media/img_one.fefff953258b54067c11.png",
+    "static/media/logo_3.png": "/tourism_frontend/static/media/logo_3.dc5e30db310d7f8a33ff.png",
+    "static/media/logo_2.png": "/tourism_frontend/static/media/logo_2.b030c1259a4b527d43c4.png",
+    "static/media/img_four.png": "/tourism_frontend/static/media/img_four.ac5ce869521bae52950c.png",
+    "static/media/search.png": "/tourism_frontend/static/media/search.ad6986e4270c77bc4116.png",
+    "static/media/tree_big.png": "/tourism_frontend/static/media/tree_big.2004668eab547d05116f.png",
+    "static/media/instagram.png": "/tourism_frontend/static/media/instagram.3e207bf8b87788c74104.png",
+    "static/media/twitter.png": "/tourism_frontend/static/media/twitter.c9776dd54b618908e387.png",
+    "static/media/tree_small.png": "/tourism_frontend/static/media/tree_small.4f52b779411c14d5010e.png",
+    "static/media/arrow_right_purple.png": "/tourism_frontend/static/media/arrow_right_purple.5ad94d103a941bf8a9ff.png",
+    "static/media/youtube.png": "/tourism_frontend/static/media/youtube.852ac87a919b120a85c8.png",
+    "static/media/down_arrow.png": "/tourism_frontend/static/media/down_arrow.515bb12bbc72fa1f2f9d.png",
+    "static/media/facebook.png": "/tourism_frontend/static/media/facebook.60e0d339da7826d94326.png",
+    "index.html": "/tourism_frontend/index.html",
+    "main.9a3ce04f.css.map": "/tourism_frontend/static/css/main.9a3ce04f.css.map",
+    "main.b4fdfe3d.js.map": "/tourism_frontend/static/js/main.b4fdfe3d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9a3ce04f.css",
+    "static/js/main.b4fdfe3d.js"
+  ]
+}
