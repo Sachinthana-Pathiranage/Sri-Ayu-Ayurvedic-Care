@@ -41,7 +41,7 @@ The system uses a Flask backend, React frontend, and integrates with SQLite data
 ## Team 
 - Kavindi Wijesundara
 - Pamoda Prabhavi Walallavita
-- Sachinthana Pathirage
+- Sachinthana Pathiranage
 - Nabeeha Thushan
 ## License
 This project is for academic and non-commercial use only. All external references and datasets are properly cited.
