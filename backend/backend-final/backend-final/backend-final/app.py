@@ -12,7 +12,7 @@ CORS(app)
 app.register_blueprint(tourism_bp, url_prefix='/tourism')
 app.register_blueprint(dosha_bp, url_prefix='/dosha')
 app.register_blueprint(disease_bp, url_prefix='/disease')
-app.register_blueprint(outcome_bp, url_prefix='/outcome')
+app.register_blueprint(outcome_bp)
 
 #-----------------------------------------------------------Dosha_Page-------------------------------------------------------------------------------------------------------
 @app.route("/dosha_frontend")
@@ -133,8 +133,8 @@ def serve_signin_static(path):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_landing(path):
-    # Use relative path to landing page build directory
-    landing_build_dir = os.path.join(os.path.dirname(__file__), '..', 'frontend-final', 'landing_page', 'build')
+
+    landing_build_dir = r"frontend-final/landing_page/build"
     abs_build_dir = os.path.abspath(landing_build_dir)
     full_path = os.path.join(abs_build_dir, path)
 
