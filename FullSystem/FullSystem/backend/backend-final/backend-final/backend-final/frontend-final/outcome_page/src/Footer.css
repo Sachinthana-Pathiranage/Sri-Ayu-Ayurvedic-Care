@@ -1,0 +1,160 @@
+.footer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    background-color: #0f7d6f;
+    align-items: center;
+    color: white;
+    padding: 50px 0;
+    grid-row: 3;
+}
+
+/* Common Box Structure */
+.box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+
+/*------------------------------------box-1--------------------------------------*/
+.box-one {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.logo-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-logo {
+    width: 180px;
+    margin-bottom: 15px;
+}
+
+.logo-footer p1 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.logo-footer p2 {
+    font-size: 16px;
+    margin-top: 8px;
+    display: block;
+    opacity: 0.9;
+}
+
+/* Navigation Links */
+.navbar-content {
+    display: flex;
+    gap: 25px;
+    margin-top: 15px;
+}
+
+.navbar-content a {
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-content a:hover {
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/*------------------------------------box-2--------------------------------------*/
+.box-two {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+    width: 90%;
+    max-width: 800px;
+}
+
+.box-two h1 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+.box-two p {
+    font-size: 15px;
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+/* Social Media Icons */
+.social-media {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.instagram,
+.facebook,
+.youtube,
+.twitter {
+    width: 32px;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.instagram:hover,
+.facebook:hover,
+.youtube:hover,
+.twitter:hover {
+    transform: scale(1.15);
+    opacity: 0.8;
+}
+
+/*------------------------------------box-3--------------------------------------*/
+.box-three {
+    text-align: center;
+    margin-top: 50px;
+    padding-bottom: 25px;
+}
+
+/* Footer Links */
+.footer-links ul {
+    list-style: none;
+    font-size: 15px;
+    padding: 8px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-links ul:hover {
+    color: black;
+    font-weight: bold;
+}
+
+/* Divider Line */
+hr {
+    width: 90%;
+    border: none;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    margin: 25px 0;
+}
+
+/* Copyright */
+.copyright {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 12px;
+    opacity: 0.9;
+}

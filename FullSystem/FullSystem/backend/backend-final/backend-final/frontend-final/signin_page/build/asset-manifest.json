@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/signinpage/static/css/main.b44981ac.css",
+    "main.js": "/signinpage/static/js/main.8397d133.js",
+    "static/js/453.520e1735.chunk.js": "/signinpage/static/js/453.520e1735.chunk.js",
+    "static/media/logo.png": "/signinpage/static/media/logo.d80c62a0d74a8e3abb63.png",
+    "static/media/undraw_dreamer_gb41.svg": "/signinpage/static/media/undraw_dreamer_gb41.e52bec15ff8d6f53ebb929a2ba6baa2f.svg",
+    "index.html": "/signinpage/index.html",
+    "main.b44981ac.css.map": "/signinpage/static/css/main.b44981ac.css.map",
+    "main.8397d133.js.map": "/signinpage/static/js/main.8397d133.js.map",
+    "453.520e1735.chunk.js.map": "/signinpage/static/js/453.520e1735.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b44981ac.css",
+    "static/js/main.8397d133.js"
+  ]
+}
