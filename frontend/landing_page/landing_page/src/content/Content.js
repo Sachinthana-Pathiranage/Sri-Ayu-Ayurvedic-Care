@@ -1,10 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
+
 import './Content.css';
 import { useNavigate } from 'react-router-dom';
 
-
-import LoadingLink from '../loading_page/LoadingLink';
-import Loading from "../loading_page/Loading";
+//import React, { useRef, useState, useEffect } from 'react';
+//import LoadingLink from '../loading_page/LoadingLink';
+//import Loading from "../loading_page/Loading";
 
 
 import img_4 from '../assets/content_img/img_4.jpg'
@@ -18,10 +19,15 @@ import img_13 from '../assets/content_img/img_13.jpg'
 import img_16 from '../assets/content_img/img_16.jpg'
 import img_22 from '../assets/content_img/img_22.jpg'
 import img_26 from '../assets/content_img/img_26.jpg'
-import male from '../assets/content_img/photos/male.jpg'
-import female from '../assets/content_img/photos/female.png'
 import img_31 from '../assets/content_img/box_6/img_31.jpg'
 import lotus from '../assets/content_img/lotus.png'
+
+import kavindi from '../assets/content_img/photos/kavindi.png'
+import nabeeha from '../assets/content_img/photos/nabeeha.png'
+import pathirana from '../assets/content_img/photos/pathirana.png'
+import prabhavi from '../assets/content_img/photos/prabhavi.png'
+
+
 
 /*import img_1 from '../assets/content_img/img_1.jpg'
 import img_2 from '../assets/content_img/img_2.jpg'
@@ -34,7 +40,10 @@ import img_18 from '../assets/content_img/img_18.jpg'
 import img_15 from '../assets/content_img/img_15.jpg'
 import img_14 from '../assets/content_img/img_14.jpg'
 import img_9 from '../assets/content_img/img_9.jpg'
-import img_12 from '../assets/content_img/img_12.jpg'*/
+import img_12 from '../assets/content_img/img_12.jpg'
+import male from '../assets/content_img/photos/male.jpg'
+import female from '../assets/content_img/photos/female.png'
+*/
 
 function Content(){
 // Reference to the element we want to animate
@@ -281,8 +290,6 @@ function Content(){
             </div>
 
 
-
-
             <div className="box-3" id="services">
                 <div className="box-3-desc animate" ref={elementRef}>
                     <h1>OUR SERVICES</h1>
@@ -382,12 +389,6 @@ function Content(){
                     <div className="design-box">
                     </div>
                 </div>
-
-
-
-
-
-
             </div>
 
 
@@ -404,37 +405,25 @@ function Content(){
                         and Ayurvedic research, we aim to empower users with<br/>
                         valuable health insights while preserving the
                         authenticity of Ayurveda in a modern, user-friendly platform.
-
-
-
-
                     </p>
-
-
                 </div>
                 <div className="us-container">
                     <div className="photo-1-circle" ref={circleRef}>
-                        <img src={female} alt="circle" className="photo-1"/>
+                        <img src={kavindi} alt="circle" className="photo-1"/>
                         <h3>W.M. Kavindi Rangana<br/>Fullstack Developer</h3>
                     </div>
                     <div className="photo-2-circle" ref={circleRef}>
-                        <img src={female} alt="circle" className="photo-2"/>
+                        <img src={prabhavi} alt="circle" className="photo-2"/>
                         <h3>Prabhavi Walallawita<br/>Fullstack Developer</h3>
-
-
                     </div>
                     <div className="photo-3-circle" ref={circleRef}>
-                        <img src={male} alt="circle" className="photo-3"/>
+                        <img src={pathirana} alt="circle" className="photo-3"/>
                         <h3>Sachinthana Pathirana<br/>Fullstack Developer</h3>
                     </div>
                     <div className="photo-4-circle" ref={circleRef}>
-                        <img src={female} alt="circle" className="photo-4"/>
+                        <img src={nabeeha} alt="circle" className="photo-4"/>
                         <h3>Nabeeha Thushan<br/>Fullstack Developer</h3>
                     </div>
-
-
-
-
                 </div>
             </div>
 

@@ -534,13 +534,19 @@
     justify-content: space-evenly;
 
 }
-.photo-1,
+
 .photo-2,
 .photo-3,
 .photo-4
 {
     width: 200px;
     height: 200px;
+    clip-path: circle(50% at 50% 50%);
+    border-color: black;
+}
+
+.photo-1 {
+    width: 200px;
     clip-path: circle(50% at 50% 50%);
     border-color: black;
 }
