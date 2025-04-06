@@ -1,8 +1,8 @@
 import React from 'react';
 import './NavBar.css';
-import logo from './assets/navbar_img/logo.png';
-import logo_2 from './assets/navbar_img/logo_2.png';
-import logo_3 from './assets/navbar_img/logo_3.png';
+import logo from '../assets/navbar_img/logo.png';
+import logo_2 from '../assets/navbar_img/logo_2.png';
+import logo_3 from '../assets/navbar_img/logo_3.png';
 
 function NavBar() {
     return (
@@ -12,16 +12,16 @@ function NavBar() {
             </div>
             <ul className="navbar-links">
                 <li>
-                    <a href='/#content'>Home</a>
+                    <a href='/public#content'>Home</a>
                 </li>
                 <li>
-                    <a href='/#about-desc'>About Us</a>
+                    <a href='/public#about-desc'>About Us</a>
                 </li>
                 <li>
-                    <a href='/#services'>Services</a>
+                    <a href='/public#services'>Services</a>
                 </li>
                 <li>
-                    <a href="/#contact">Contact</a>
+                    <a href="/public#contact">Contact</a>
                 </li>
 
                 <li>

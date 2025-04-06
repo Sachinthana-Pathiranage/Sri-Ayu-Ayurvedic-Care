@@ -9,9 +9,12 @@ import bg_four from './assets/img_four.png';
 import tree_big from './assets/tree_big.png';
 import tree_small from './assets/tree_small.png';
 import tree_bottom from './assets/tree_bottom.png';
+import dosha_logo from './assets/dosha_logo.png'
 /*import woman from './assets/woman.png';*/
 /*import woman_2 from './assets/woman_2.png'*/
-import NavBar from "./NavBar";
+import NavBar from "./navbar/NavBar";
+import Footer from "./Footer";
+
 
 
 
@@ -24,10 +27,10 @@ function App() {
         shoulder_Breadth:'',
         chest_Breadth:'',
         walking_style:'',
-        skin_Type:'',
+        weight_Changes:'',
         sleep_Quality: '',
         working_Quality:'',
-        appetite_Frequency:'',
+        retaining_quality:'',
         working_style:'',
 
 
@@ -60,7 +63,7 @@ function App() {
 
 
             const result = await response.json();
-            setDoshaResult(result.dosha_prediction);
+            setDoshaResult(result.dosha_name);
         } catch (error) {
             console.error('Error fetching dosha type:', error);
         }
@@ -107,6 +110,7 @@ function App() {
 
     return (
         <div className="App">
+            <div className="main">
 
             <div className="split-container">
                 <NavBar />
@@ -286,20 +290,23 @@ function App() {
                             </div>
 
                             <div key={animationKey + "-2"} className="form-part-two animate">
-                            {/*6_skin_Type*/}
+                            {/*6_weight_Changes*/}
                             <div>
-                                <label htmlFor="skin_Type">Skin Type</label>
+                                <label htmlFor="weight_Changes">Weight Changes</label>
                                 <select
                                     id="6"
-                                    name="skin_Type"
-                                    value={formData.skin_Type}
+                                    name="weight_Changes"
+                                    value={formData.weight_Changes}
                                     onChange={handleMainChange
                                     }
                                     required
                                 >
                                     <option value="" disabled selected hidden>Select</option>
-                                    <option value="Thin">Thin</option>
-                                    <option value="Thick">Thick</option>
+                                    <option value="Difficultyingaining">Difficulty in gaining</option>
+                                    <option value="Gainandloseeasily">Gain and lose easily</option>
+                                    <option value="Gaineasilyandlosewithdifficulty">Gain easily and lose with difficulty</option>
+                                    <option value="Stable">Stable</option>
+
                                 </select>
                             </div>
 
@@ -342,20 +349,21 @@ function App() {
                             </div>
 
 
-                            {/*9_appetite_Frequency*/}
+                            {/*9_retaining_quality*/}
                             <div>
-                                <label htmlFor="appetite_Frequency">Appetite Frequency</label>
+                                <label htmlFor="retaining_quality">Retaining Quality</label>
                                 <select
                                     id="9"
-                                    name="appetite_Frequency"
-                                    value={formData.appetite_Frequency}
+                                    name="retaining_quality"
+                                    value={formData.retaining_quality}
                                     onChange={handleMainChange
                                     }
                                     required
                                 >
                                     <option value="" disabled selected hidden>Select</option>
-                                    <option value="Regular">Regular</option>
-                                    <option value="Irregular">Irregular</option>
+                                    <option value="Good">Good</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Poor">Poor</option>
                                 </select>
                             </div>
 
@@ -387,10 +395,19 @@ function App() {
             </div>
             {doshaResult && (
                 <div className="result">
-                    <h2>Predicted Dosha Type:</h2>
+                    <div className="result_logo">
+                    <img
+                        src={dosha_logo}
+                        alt="dosha_logo"
+                        className="dosha_logo"
+                    />
+                        </div>
+                    <h2>Predicted <br/> Dosha Type:</h2>
                     <p>{doshaResult}</p>
                 </div>
             )}
+            </div>
+            <Footer />
         </div>
     );
 }
