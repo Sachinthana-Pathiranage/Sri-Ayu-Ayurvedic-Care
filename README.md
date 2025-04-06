@@ -28,7 +28,7 @@ The system uses a Flask backend, React frontend, and integrates with SQLite data
 ## Dataset
 - Collected manually from Ayurvedic sources and consultation with doctors and wellness centers.
 - For dosha classification component a publicly available dataset was used. 
-- Tourism data extracted from Tourism Department's sources.
+- Tourism data extracted from Sri Lanka's tourism development website's annual and monthly reports.
 ## Evaluation Metrics
 - Dosha & Disease Classification: Accuracy, Precision, Recall, F1-score
 - Treatment Outcome & Tourism Forecasting: RMSE, MAE, R² Score
