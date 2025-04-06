@@ -4,7 +4,6 @@ Sri Ayu is an AI-driven Ayurvedic wellness system designed to predict doshas, di
 - Features
 - System Architecture
 - Technologies Used
-- Usage
 - Dataset Information
 - Evaluation
 - Future Enhancements
@@ -44,6 +43,8 @@ The system uses a Flask backend, React frontend, and integrates with SQLite data
 - Pamoda Prabhavi Walallavita
 - Sachinthana Pathirage
 - Nabeeha Thushan
+## License
+This project is for academic and non-commercial use only. All external references and datasets are properly cited.
 
 
 
