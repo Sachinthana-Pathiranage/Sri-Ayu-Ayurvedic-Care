@@ -35,6 +35,7 @@ The system uses a Flask backend, React frontend, and integrates with SQLite data
 ## Future Enhancements
 - Expand disease coverage
 - Dosha imbalance analysis
+- Show long term forecasts of tourists
 - Multilingual support
 - Deep learning model integration
 - Mobile app version
