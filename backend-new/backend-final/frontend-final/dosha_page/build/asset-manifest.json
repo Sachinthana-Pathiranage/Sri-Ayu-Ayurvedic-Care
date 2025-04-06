@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/dosha_frontend/static/css/main.db06d3cc.css",
-    "main.js": "/dosha_frontend/static/js/main.af340102.js",
+    "main.css": "/dosha_frontend/static/css/main.e5c42200.css",
+    "main.js": "/dosha_frontend/static/js/main.bf278a99.js",
     "static/js/453.65e869cb.chunk.js": "/dosha_frontend/static/js/453.65e869cb.chunk.js",
     "static/media/img_three.png": "/dosha_frontend/static/media/img_three.58571375b56fe036d7ad.png",
     "static/media/img_two.png": "/dosha_frontend/static/media/img_two.24740f732f15aa5de6f3.png",
@@ -11,18 +11,23 @@
     "static/media/logo_3.png": "/dosha_frontend/static/media/logo_3.dc5e30db310d7f8a33ff.png",
     "static/media/logo_2.png": "/dosha_frontend/static/media/logo_2.b030c1259a4b527d43c4.png",
     "static/media/img_four.png": "/dosha_frontend/static/media/img_four.ac5ce869521bae52950c.png",
+    "static/media/dosha_logo.png": "/dosha_frontend/static/media/dosha_logo.d838d965536fd853293f.png",
     "static/media/search.png": "/dosha_frontend/static/media/search.ad6986e4270c77bc4116.png",
     "static/media/tree_big.png": "/dosha_frontend/static/media/tree_big.2004668eab547d05116f.png",
+    "static/media/instagram.png": "/dosha_frontend/static/media/instagram.3e207bf8b87788c74104.png",
+    "static/media/twitter.png": "/dosha_frontend/static/media/twitter.c9776dd54b618908e387.png",
     "static/media/tree_small.png": "/dosha_frontend/static/media/tree_small.4f52b779411c14d5010e.png",
     "static/media/arrow_right_purple.png": "/dosha_frontend/static/media/arrow_right_purple.5ad94d103a941bf8a9ff.png",
+    "static/media/youtube.png": "/dosha_frontend/static/media/youtube.852ac87a919b120a85c8.png",
     "static/media/down_arrow.png": "/dosha_frontend/static/media/down_arrow.515bb12bbc72fa1f2f9d.png",
+    "static/media/facebook.png": "/dosha_frontend/static/media/facebook.60e0d339da7826d94326.png",
     "index.html": "/dosha_frontend/index.html",
-    "main.db06d3cc.css.map": "/dosha_frontend/static/css/main.db06d3cc.css.map",
-    "main.af340102.js.map": "/dosha_frontend/static/js/main.af340102.js.map",
+    "main.e5c42200.css.map": "/dosha_frontend/static/css/main.e5c42200.css.map",
+    "main.bf278a99.js.map": "/dosha_frontend/static/js/main.bf278a99.js.map",
     "453.65e869cb.chunk.js.map": "/dosha_frontend/static/js/453.65e869cb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.db06d3cc.css",
-    "static/js/main.af340102.js"
+    "static/css/main.e5c42200.css",
+    "static/js/main.bf278a99.js"
   ]
 }

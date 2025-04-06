@@ -4,7 +4,7 @@ from sqlite3 import Error
 def get_db_connection():
     try:
         # Connect to the SQLite database
-        connection = sqlite3.connect(r'C:\Users\BM\IdeaProjects\backend-final\backend-final\wellnessPlan3.db')
+        connection = sqlite3.connect('wellnessPlan3.db')
         print("Connected to SQLite database")
         return connection
     except Error as e:
