@@ -1,0 +1,7 @@
+flask
+flask-cors
+pandas
+scikit-learn
+xgboost
+joblib
+openpyxl  # Required to read Excel files
