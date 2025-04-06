@@ -134,7 +134,7 @@ def serve_signin_static(path):
 @app.route('/<path:path>')
 def serve_landing(path):
 
-    landing_build_dir = r"C:\Users\prabh\Documents\GitHub\Sri-Ayu-Ayurvedic-Care-final-final\backend-new\backend-final\frontend-final\landing_page\build"
+    landing_build_dir = r"C:\Users\prabh\Documents\GitHub\Sri-Ayu-Ayurvedic-Care-final-4\backend-new\backend-final\frontend-final\landing_page\build"
     abs_build_dir = os.path.abspath(landing_build_dir)
     full_path = os.path.join(abs_build_dir, path)
 
